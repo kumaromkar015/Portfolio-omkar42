@@ -1,0 +1,23 @@
+export const seoData = {
+  title: "Omkar Kumar | Senior Frontend Architect & Full Stack Engineer",
+  description: "Senior Software Engineer and Full Stack Architect specializing in premium Next.js applications, high-performance systems, and clean UI/UX design. Delivering world-class digital experiences.",
+  url: "https://omkarkumar.dev",
+  siteName: "Omkar Kumar Portfolio",
+  author: "Omkar Kumar",
+  twitter: "@kumaromkar",
+  github: "kumaromkar015",
+  linkedin: "kumaromkar015",
+  locale: "en_US",
+  keywords: [
+    "Senior Software Engineer",
+    "Frontend Architect",
+    "Next.js Developer",
+    "React Engineer",
+    "Full Stack Developer",
+    "Web Application Developer",
+    "UI/UX Design",
+    "TypeScript Expert",
+    "Framer Motion Portfolio",
+    "Stripe-like UI Design",
+  ],
+};
