@@ -4,11 +4,13 @@ const BlogSchema = new Schema(
 	{
 		title: { type: String, required: true },
 		slug: { type: String, required: true, unique: true },
-		content: { type: String }, // raw MDX string
+		content: { type: String },
 		tags: [String],
 		published: { type: Boolean, default: false },
 		coverImage: { type: String },
 		excerpt: { type: String },
+		category: { type: String },
+		author: { type: String },
 		// i18n fields (Phase 5)
 		titleHi: { type: String },
 		contentHi: { type: String },
@@ -16,7 +18,7 @@ const BlogSchema = new Schema(
 	{ timestamps: true },
 );
 
-BlogSchema.index({ slug: 1 });
 BlogSchema.index({ published: 1, createdAt: -1 });
+BlogSchema.index({ slug: 1 });
 
 export const Blog = model("Blog", BlogSchema);

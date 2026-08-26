@@ -8,8 +8,29 @@ import { GithubIcon, LinkedinIcon } from "./BrandIcons";
 import { socialsData } from "@/data/socials";
 import SpotifyWidget from "./SpotifyWidget";
 import DynamicIcon from "./DynamicIcon";
+import { api } from "@/lib/api";
 
 export default function Hero() {
+  const [profile, setProfile] = React.useState<any>({
+    name: "Omkar Kumar",
+    bio: "Senior Frontend Architect & Full Stack Developer",
+    social: {
+      github: socialsData.github,
+      linkedin: socialsData.linkedin,
+      twitter: socialsData.twitter,
+    }
+  });
+
+  React.useEffect(() => {
+    api.getProfile()
+      .then((data) => {
+        if (data) {
+          setProfile(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const stats = [
     { value: "5+", label: "Years Exp" },
     { value: "15+", label: "Projects Completed" },
@@ -71,7 +92,7 @@ export default function Hero() {
             >
               Hi, I'm{" "}
               <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
-                Omkar Kumar
+                {profile.name}
               </span>
             </motion.h1>
             <motion.p
@@ -80,7 +101,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg sm:text-xl font-medium text-slate-600 dark:text-slate-300"
             >
-              Senior Frontend Architect & Full Stack Developer
+              {profile.bio}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -129,7 +150,7 @@ export default function Hero() {
             className="flex items-center justify-center lg:justify-start gap-4 pt-2"
           >
             <a
-              href={socialsData.github}
+              href={profile.social?.github || socialsData.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-violet-500 transition-colors"
@@ -137,7 +158,7 @@ export default function Hero() {
               <GithubIcon size={20} />
             </a>
             <a
-              href={socialsData.linkedin}
+              href={profile.social?.linkedin || socialsData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-violet-500 transition-colors"

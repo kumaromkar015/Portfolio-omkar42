@@ -5,13 +5,28 @@ import Link from "next/link";
 import { ArrowUp, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "./BrandIcons";
 import { socialsData } from "@/data/socials";
+import { api } from "@/lib/api";
 
 export default function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [year, setYear] = useState<number>(2026);
+  const [socials, setSocials] = useState<any>({
+    github: socialsData.github,
+    linkedin: socialsData.linkedin,
+    twitter: socialsData.twitter,
+  });
 
   useEffect(() => {
     setYear(new Date().getFullYear());
+    
+    api.getProfile()
+      .then((data) => {
+        if (data && data.social) {
+          setSocials(data.social);
+        }
+      })
+      .catch(() => {});
+
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
@@ -87,7 +102,7 @@ export default function Footer() {
           {/* Social Icons */}
           <div className="flex items-center gap-4">
             <a
-              href={socialsData.github}
+              href={socials.github || socialsData.github}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-900/60"
@@ -96,7 +111,7 @@ export default function Footer() {
               <GithubIcon size={18} />
             </a>
             <a
-              href={socialsData.linkedin}
+              href={socials.linkedin || socialsData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-900/60"
@@ -105,7 +120,7 @@ export default function Footer() {
               <LinkedinIcon size={18} />
             </a>
             <a
-              href={socialsData.twitter}
+              href={socials.twitter || socialsData.twitter}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-900/60"

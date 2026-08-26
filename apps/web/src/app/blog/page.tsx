@@ -1,24 +1,51 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { blogData, BlogPost } from "@/data/blog";
 import { ArrowLeft, Search, Rss, Clock } from "lucide-react";
+import { api } from "@/lib/api";
 
 export default function BlogGridPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<"All" | "Engineering" | "Design" | "Architecture">("All");
+  const [blogsList, setBlogsList] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    api.getBlogs()
+      .then((data) => {
+        if (data && data.length > 0) {
+          const mapped = data.map((b: any) => ({
+            id: b.slug,
+            title: b.title,
+            excerpt: b.excerpt || "",
+            content: b.content || "",
+            category: (b.tags?.[0] || "Engineering") as any,
+            publishedAt: new Date(b.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+            readTime: "5 min read",
+            imageUrl: b.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80",
+            featured: b.published,
+          }));
+          setBlogsList(mapped);
+        } else {
+          setBlogsList(blogData);
+        }
+      })
+      .catch(() => {
+        setBlogsList(blogData);
+      });
+  }, []);
 
   const categories = ["All", "Engineering", "Design", "Architecture"];
 
-  const filteredPosts = blogData.filter((post) => {
+  const filteredPosts = blogsList.filter((post) => {
     const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-  const featuredPost = blogData.find((post) => post.featured);
+  const featuredPost = blogsList.find((post) => post.featured) || blogsList[0];
 
   return (
     <main className="min-h-screen pt-28 pb-20 bg-slate-50 dark:bg-bg-dark text-slate-900 dark:text-white">

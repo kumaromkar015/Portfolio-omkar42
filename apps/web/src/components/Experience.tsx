@@ -1,13 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { experienceData, JobExperience } from "@/data/experience";
 import { Briefcase, Calendar, Star, ChevronRight } from "lucide-react";
+import { api } from "@/lib/api";
 
 export default function Experience() {
   const [activeIdx, setActiveIdx] = useState(0);
-  const activeJob = experienceData[activeIdx];
+  const [experiencesList, setExperiencesList] = useState<JobExperience[]>([]);
+
+  useEffect(() => {
+    api.getExperiences()
+      .then((data) => {
+        if (data && data.length > 0) {
+          setExperiencesList(data);
+        } else {
+          setExperiencesList(experienceData);
+        }
+      })
+      .catch(() => {
+        setExperiencesList(experienceData);
+      });
+  }, []);
+
+  const activeJob = experiencesList[activeIdx] || experienceData[0];
 
   return (
     <section
@@ -32,7 +49,7 @@ export default function Experience() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           {/* Left Column: Job Selector List */}
           <div className="lg:col-span-4 flex flex-col gap-3">
-            {experienceData.map((job, idx) => {
+            {experiencesList.map((job, idx) => {
               const isActive = idx === activeIdx;
               return (
                 <button

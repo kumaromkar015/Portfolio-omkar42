@@ -4,15 +4,51 @@ import React, { use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar, Rss, ArrowRight } from "lucide-react";
-import { blogData } from "@/data/blog";
+import { blogData, BlogPost } from "@/data/blog";
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+import { api } from "@/lib/api";
+
 export default function BlogArticlePage({ params }: PageProps) {
   const resolvedParams = use(params);
-  const article = blogData.find((post) => post.id === resolvedParams.id);
+  const [article, setArticle] = React.useState<BlogPost | null>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    api.getBlog(resolvedParams.id)
+      .then((data) => {
+        if (data) {
+          setArticle({
+            id: data.slug,
+            title: data.title,
+            excerpt: data.excerpt || "",
+            content: data.content || "",
+            category: (data.tags?.[0] || "Engineering") as any,
+            publishedAt: new Date(data.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+            readTime: "5 min read",
+            imageUrl: data.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80",
+          });
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        // Fallback to static mock list
+        const staticMatch = blogData.find((p) => p.id === resolvedParams.id);
+        setArticle(staticMatch || null);
+        setLoading(false);
+      });
+  }, [resolvedParams.id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-bg-dark text-slate-900 dark:text-white">
+        <div className="w-8 h-8 rounded-full border-4 border-violet-600 border-t-transparent animate-spin" />
+      </div>
+    );
+  }
 
   if (!article) {
     notFound();

@@ -6,16 +6,49 @@ import { motion, AnimatePresence } from "framer-motion";
 import { projectsData, Project } from "@/data/projects";
 import { ArrowUpRight, ExternalLink, BookOpen } from "lucide-react";
 import { GithubIcon } from "./BrandIcons";
+import { api } from "@/lib/api";
 
 type ProjectCategory = "All" | "Full Stack" | "Frontend" | "Open Source";
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("All");
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [projectsList, setProjectsList] = useState<Project[]>([]);
   const categories: ProjectCategory[] = ["All", "Full Stack", "Frontend", "Open Source"];
 
-  const filteredProjects = projectsData.filter((project) => {
+  React.useEffect(() => {
+    api.getProjects()
+      .then((data) => {
+        if (data && data.length > 0) {
+          // Map Mongo schemas to frontend keys
+          const mapped = data.map((p: any) => ({
+            id: p._id,
+            title: p.title,
+            category: (p.featured ? "Full Stack" : "Frontend") as any, // fallback categories map
+            description: p.description,
+            extendedDescription: p.description,
+            techStack: p.techStack || [],
+            features: [],
+            architecture: "",
+            role: "",
+            challenges: "",
+            solution: "",
+            impact: "",
+            githubUrl: p.githubUrl || "",
+            liveUrl: p.liveUrl || "",
+            imageUrl: p.coverImage || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+          }));
+          setProjectsList(mapped);
+        } else {
+          setProjectsList(projectsData);
+        }
+      })
+      .catch(() => {
+        setProjectsList(projectsData);
+      });
+  }, []);
+
+  const filteredProjects = projectsList.filter((project) => {
     const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
     const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           project.techStack.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));

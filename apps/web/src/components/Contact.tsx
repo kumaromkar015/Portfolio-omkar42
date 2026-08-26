@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import confetti from "canvas-confetti";
-import { Send, MapPin, Mail, Clock, Calendar, CheckCircle2 } from "lucide-react";
+import { Send, MapPin, Mail, Clock, Calendar, CheckCircle2, AlertCircle } from "lucide-react";
 import { socialsData } from "@/data/socials";
+import { api } from "@/lib/api";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters long"),
@@ -20,6 +21,7 @@ type ContactFormInputs = z.infer<typeof contactSchema>;
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -32,19 +34,24 @@ export default function Contact() {
 
   const onSubmit = async (data: ContactFormInputs) => {
     setIsSubmitting(true);
-    // Mock API delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    
-    // Success Confetti celebration
-    confetti({
-      particleCount: 120,
-      spread: 70,
-      origin: { y: 0.6 },
-    });
+    setSubmitError(null);
+    try {
+      await api.submitContact(data);
+      setSubmitSuccess(true);
+      
+      // Success Confetti celebration
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
 
-    reset();
+      reset();
+    } catch (error: any) {
+      setSubmitError(error.message || "Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -212,6 +219,14 @@ export default function Contact() {
                     <p className="text-xs text-rose-500 font-medium">{errors.message.message}</p>
                   )}
                 </div>
+
+                {/* Error display */}
+                {submitError && (
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 text-rose-600 dark:text-rose-400 text-sm">
+                    <AlertCircle size={16} className="flex-shrink-0" />
+                    <p>{submitError}</p>
+                  </div>
+                )}
 
                 {/* Submit button */}
                 <button

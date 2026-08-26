@@ -1,5 +1,4 @@
-import { timeStamp } from "console";
-import { model, Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const profileSchema = new Schema(
 	{
@@ -22,4 +21,4 @@ const profileSchema = new Schema(
 	{ timestamps: true },
 );
 
-export const Profile = model('Profile' , profileSchema);
+export const Profile = model('Profile', profileSchema);
