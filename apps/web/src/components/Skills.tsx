@@ -27,12 +27,12 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 md:py-28 bg-slate-50 dark:bg-bg-dark border-t border-slate-200 dark:border-slate-900 text-slate-900 dark:text-white"
+      className="py-20 md:py-28 bg-slate-50 dark:bg-bg-dark border-t border-slate-200 dark:border-zinc-900 text-slate-900 dark:text-white"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-300 border border-violet-200 dark:border-violet-850 inline-block uppercase tracking-wider">
+          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-lime-100 dark:bg-lime-950/30 text-lime-750 dark:text-lime-400 border border-lime-300 dark:border-lime-500/20 inline-block uppercase tracking-wider">
             Technical Stack
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
@@ -51,8 +51,8 @@ export default function Skills() {
               onClick={() => setSelectedCategory(category)}
               className={`px-4.5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-95 border ${
                 selectedCategory === category
-                  ? "bg-violet-600 border-violet-650 text-white shadow-lg shadow-violet-500/20"
-                  : "bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-450 dark:hover:border-slate-700 text-slate-600 dark:text-slate-400"
+                  ? "bg-lime-600 border-lime-650 dark:bg-lime-400 dark:border-lime-350 text-white dark:text-black shadow-md dark:shadow-[0_0_12px_rgba(163,230,53,0.25)]"
+                  : "bg-white dark:bg-zinc-900/60 border-slate-200 dark:border-zinc-800/80 hover:border-lime-500/30 dark:hover:border-lime-400/30 text-slate-600 dark:text-slate-400"
               }`}
             >
               {category}
@@ -74,14 +74,14 @@ export default function Skills() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-850 p-5 rounded-2xl shadow hover:border-violet-500/40 dark:hover:border-violet-500/30 transition-all duration-300 group hover:shadow-lg relative overflow-hidden"
+                className="bg-white dark:bg-card-dark border border-slate-200 dark:border-zinc-800 p-5 rounded-2xl shadow hover:border-lime-500/40 dark:hover:border-lime-400/40 transition-all duration-300 group hover:shadow-lg relative overflow-hidden"
               >
                 {/* Micro particle border glow on hover */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-lime-500 to-lime-300 dark:from-lime-450 dark:to-lime-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-violet-50 dark:bg-slate-900 text-violet-600 dark:text-violet-400 group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-2.5 rounded-xl bg-lime-50 dark:bg-zinc-950 text-lime-650 dark:text-lime-400 group-hover:scale-110 transition-transform duration-300">
                       <DynamicIcon name={skill.iconName} size={20} />
                     </div>
                     <div>
@@ -92,7 +92,7 @@ export default function Skills() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100 dark:border-violet-900/40">
+                    <span className="text-xs font-bold text-lime-650 dark:text-lime-400 bg-lime-50 dark:bg-lime-950/20 px-2 py-0.5 rounded border border-lime-100 dark:border-lime-900/30">
                       {skill.experienceLevel}
                     </span>
                     <div className="text-[10px] text-slate-400 mt-1 font-medium">{skill.years} years exp</div>
@@ -105,13 +105,13 @@ export default function Skills() {
                     <span>Proficiency</span>
                     <span>{skill.progress}%</span>
                   </div>
-                  <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-1.5 w-full bg-slate-100 dark:bg-zinc-900 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.progress}%` }}
                       viewport={{ once: true }}
                       transition={{ duration: 1, ease: "easeOut" }}
-                      className="h-full bg-gradient-to-r from-violet-600 to-cyan-500 rounded-full"
+                      className="h-full bg-gradient-to-r from-lime-600 to-lime-400 dark:from-lime-500 dark:to-lime-300 rounded-full"
                     />
                   </div>
                 </div>

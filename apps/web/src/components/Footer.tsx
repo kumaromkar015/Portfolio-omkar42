@@ -40,13 +40,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-slate-200 dark:border-slate-900 bg-white/30 dark:bg-bg-dark/30 py-12 md:py-16 overflow-hidden">
+    <footer className="relative border-t border-slate-205 dark:border-zinc-900 bg-slate-50/50 dark:bg-black/40 py-12 md:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand Info */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-fuchsia-600 flex items-center justify-center font-bold text-white shadow-lg">
+              <div className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-black border border-lime-650/40 dark:border-lime-500/40 text-lime-600 dark:text-lime-400 flex items-center justify-center font-bold shadow-md shadow-lime-500/5">
                 OK
               </div>
               <span className="font-extrabold tracking-tight text-slate-950 dark:text-white">
@@ -65,17 +65,17 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/#about" className="text-slate-500 dark:text-slate-400 hover:text-violet-500 dark:hover:text-violet-400 transition-colors">
+                <Link href="/#about" className="text-slate-500 dark:text-slate-400 hover:text-lime-650 dark:hover:text-lime-400 transition-colors">
                   About Me
                 </Link>
               </li>
               <li>
-                <Link href="/#projects" className="text-slate-500 dark:text-slate-400 hover:text-violet-500 dark:hover:text-violet-400 transition-colors">
+                <Link href="/#projects" className="text-slate-500 dark:text-slate-400 hover:text-lime-650 dark:hover:text-lime-400 transition-colors">
                   Featured Projects
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-slate-500 dark:text-slate-400 hover:text-violet-500 dark:hover:text-violet-400 transition-colors">
+                <Link href="/blog" className="text-slate-500 dark:text-slate-400 hover:text-lime-650 dark:hover:text-lime-400 transition-colors">
                   Blog & Articles
                 </Link>
               </li>
@@ -98,14 +98,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom Line */}
-        <div className="border-t border-slate-200 dark:border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="border-t border-slate-200 dark:border-zinc-800/80 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Social Icons */}
           <div className="flex items-center gap-4">
             <a
               href={socials.github || socialsData.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-900/60"
+              className="p-2 rounded-lg border border-slate-200 dark:border-zinc-800/80 hover:border-lime-600 dark:hover:border-lime-400 text-slate-550 hover:text-lime-650 dark:hover:text-lime-400 transition-all hover:bg-slate-100 dark:hover:bg-zinc-900/60"
               aria-label="GitHub Profile"
             >
               <GithubIcon size={18} />
@@ -114,7 +114,7 @@ export default function Footer() {
               href={socials.linkedin || socialsData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-900/60"
+              className="p-2 rounded-lg border border-slate-200 dark:border-zinc-800/80 hover:border-lime-600 dark:hover:border-lime-400 text-slate-550 hover:text-lime-650 dark:hover:text-lime-400 transition-all hover:bg-slate-100 dark:hover:bg-zinc-900/60"
               aria-label="LinkedIn Profile"
             >
               <LinkedinIcon size={18} />
@@ -123,14 +123,14 @@ export default function Footer() {
               href={socials.twitter || socialsData.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-900/60"
+              className="p-2 rounded-lg border border-slate-200 dark:border-zinc-800/80 hover:border-lime-600 dark:hover:border-lime-400 text-slate-550 hover:text-lime-650 dark:hover:text-lime-400 transition-all hover:bg-slate-100 dark:hover:bg-zinc-900/60"
               aria-label="Twitter Profile"
             >
               <TwitterIcon size={18} />
             </a>
             <a
               href={`mailto:${socialsData.email}`}
-              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-900/60"
+              className="p-2 rounded-lg border border-slate-200 dark:border-zinc-800/80 hover:border-lime-600 dark:hover:border-lime-400 text-slate-550 hover:text-lime-650 dark:hover:text-lime-400 transition-all hover:bg-slate-100 dark:hover:bg-zinc-900/60"
               aria-label="Send Email"
             >
               <Mail size={18} />
@@ -141,7 +141,7 @@ export default function Footer() {
           <div className="text-xs text-slate-500 dark:text-slate-400 text-center md:text-right">
             <p>© {year} Omkar Kumar. All rights reserved.</p>
             <p className="mt-1">
-              Built with <span className="text-violet-500">Next.js 16</span>, TypeScript & Tailwind CSS.
+              Built with <span className="text-lime-605 dark:text-lime-400 font-semibold">Next.js 16</span>, TypeScript & Tailwind CSS.
             </p>
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function Footer() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-22 right-6 z-50 glass hover:bg-slate-800/80 text-slate-400 hover:text-white p-3 rounded-full shadow-2xl flex items-center justify-center border border-slate-700/50 hover:border-slate-600 transition-all cursor-pointer active:scale-95"
+          className="fixed bottom-22 right-6 z-50 glass bg-white/70 dark:bg-black/60 hover:bg-lime-50 dark:hover:bg-zinc-900 text-slate-450 dark:text-slate-400 hover:text-lime-650 dark:hover:text-lime-400 p-3 rounded-full shadow-2xl flex items-center justify-center border border-slate-300 dark:border-zinc-800 hover:border-lime-500 dark:hover:border-lime-400 transition-all cursor-pointer active:scale-95 shadow-md"
           title="Scroll to Top"
           aria-label="Scroll to Top"
         >

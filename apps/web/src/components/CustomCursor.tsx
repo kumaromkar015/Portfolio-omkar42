@@ -75,28 +75,28 @@ export default function CustomCursor() {
     <>
       {/* Outer soft glow ring (lagged with spring, offset by half its width/height: w-8 = 32px, so -16px) */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-violet-500/40 pointer-events-none z-[9999] hidden md:block -ml-4 -mt-4"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-lime-500/40 pointer-events-none z-[9999] hidden md:block -ml-4 -mt-4"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
         }}
         animate={{
           scale: isHovered ? 1.5 : 1,
-          backgroundColor: isHovered ? "rgba(139, 92, 246, 0.08)" : "rgba(139, 92, 246, 0)",
-          borderColor: isHovered ? "rgba(6, 182, 212, 0.6)" : "rgba(139, 92, 246, 0.4)",
+          backgroundColor: isHovered ? "rgba(163, 230, 53, 0.08)" : "rgba(163, 230, 53, 0)",
+          borderColor: isHovered ? "rgba(132, 204, 22, 0.6)" : "rgba(163, 230, 53, 0.4)",
         }}
         transition={{ type: "tween", ease: "backOut", duration: 0.2 }}
       />
       {/* Inner dot (tracks cursor exactly, offset by half its width/height: w-2 = 8px, so -4px) */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-violet-500 rounded-full pointer-events-none z-[9999] hidden md:block -ml-1 -mt-1"
+        className="fixed top-0 left-0 w-2 h-2 bg-lime-500 rounded-full pointer-events-none z-[9999] hidden md:block -ml-1 -mt-1"
         style={{
           x: cursorX,
           y: cursorY,
         }}
         animate={{
           scale: isHovered ? 0.5 : 1,
-          backgroundColor: isHovered ? "#06b6d4" : "#a855f7",
+          backgroundColor: isHovered ? "#84cc16" : "#a3e635",
         }}
         transition={{ type: "tween", ease: "linear", duration: 0.05 }}
       />

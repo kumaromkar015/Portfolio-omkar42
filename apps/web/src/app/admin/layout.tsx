@@ -41,7 +41,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-bg-dark text-slate-900 dark:text-white">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 rounded-full border-4 border-violet-600 border-t-transparent animate-spin" />
+          <div className="w-8 h-8 rounded-full border-4 border-lime-600 border-t-transparent animate-spin" />
           <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Verifying session...</span>
         </div>
       </div>
@@ -56,9 +56,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-bg-dark text-slate-900 dark:text-white">
       {/* Admin Panel Header */}
-      <header className="border-b border-slate-200 dark:border-slate-850 bg-white/70 dark:bg-bg-dark/70 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex justify-between items-center">
+      <header className="border-b border-slate-200 dark:border-zinc-800/80 bg-white/70 dark:bg-bg-dark/70 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-cyan-500 flex items-center justify-center font-bold text-white shadow-md">
+          <div className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-black border border-lime-650/40 dark:border-lime-500/40 text-lime-655 dark:text-lime-400 flex items-center justify-center font-bold shadow-md shadow-lime-500/5">
             A
           </div>
           <div>
@@ -72,7 +72,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="flex items-center gap-4">
           <Link
             href="/"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-250 dark:border-slate-800 text-xs font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-250 dark:border-zinc-850 text-xs font-bold text-slate-500 hover:text-lime-650 dark:hover:text-lime-450 hover:border-lime-500 dark:hover:border-lime-400/50 transition-colors"
           >
             <Home size={14} /> View Site
           </Link>

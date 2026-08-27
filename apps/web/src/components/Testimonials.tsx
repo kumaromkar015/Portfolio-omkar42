@@ -21,12 +21,12 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-20 md:py-28 bg-white dark:bg-bg-dark border-t border-slate-200 dark:border-slate-900 text-slate-900 dark:text-white overflow-hidden"
+      className="py-20 md:py-28 bg-white dark:bg-bg-dark border-t border-slate-200 dark:border-zinc-900 text-slate-900 dark:text-white overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-6 relative">
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-12 space-y-4">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-300 border border-violet-200 dark:border-violet-850 inline-block uppercase tracking-wider">
+          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-lime-100 dark:bg-lime-950/30 text-lime-750 dark:text-lime-400 border border-lime-300 dark:border-lime-500/20 inline-block uppercase tracking-wider">
             Testimonials
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
@@ -35,8 +35,8 @@ export default function Testimonials() {
         </div>
 
         {/* Carousel slide container */}
-        <div className="bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-850 rounded-3xl p-8 md:p-12 relative shadow-sm min-h-[250px] flex flex-col justify-between">
-          <Quote className="absolute top-6 left-6 text-violet-500/10 dark:text-violet-500/15" size={80} />
+        <div className="bg-slate-50 dark:bg-zinc-900/40 border border-slate-200 dark:border-zinc-800/80 rounded-3xl p-8 md:p-12 relative shadow-sm min-h-[250px] flex flex-col justify-between">
+          <Quote className="absolute top-6 left-6 text-lime-500/10 dark:text-lime-400/15" size={80} />
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -48,7 +48,7 @@ export default function Testimonials() {
               className="space-y-6 relative z-10"
             >
               {/* Feedback Content */}
-              <p className="text-base md:text-lg text-slate-650 dark:text-slate-300 italic leading-relaxed">
+              <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 italic leading-relaxed">
                 “{activeTestimonial.content}”
               </p>
 
@@ -57,16 +57,16 @@ export default function Testimonials() {
                 <img
                   src={activeTestimonial.avatarUrl}
                   alt={activeTestimonial.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-violet-500/40"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-lime-500/45 dark:border-lime-400/45"
                 />
                 <div>
-                  <h4 className="font-bold text-sm text-slate-950 dark:text-white">
+                  <h4 className="font-bold text-sm text-slate-955 dark:text-white">
                     {activeTestimonial.name}
                   </h4>
                   <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                    {activeTestimonial.role} @ <span className="text-violet-600 dark:text-violet-450">{activeTestimonial.company}</span>
+                    {activeTestimonial.role} @ <span className="text-lime-650 dark:text-lime-400">{activeTestimonial.company}</span>
                   </div>
-                  <span className="text-[9px] uppercase font-extrabold bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded border border-slate-300 dark:border-slate-750 inline-block mt-1">
+                  <span className="text-[9px] uppercase font-extrabold bg-slate-200 dark:bg-zinc-950 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded border border-slate-300 dark:border-zinc-800/70 inline-block mt-1">
                     {activeTestimonial.relationship} review
                   </span>
                 </div>
@@ -75,17 +75,17 @@ export default function Testimonials() {
           </AnimatePresence>
 
           {/* Navigation Controls */}
-          <div className="flex justify-end gap-3 mt-6 border-t border-slate-200 dark:border-slate-800/80 pt-5">
+          <div className="flex justify-end gap-3 mt-6 border-t border-slate-200 dark:border-zinc-800/80 pt-5">
             <button
               onClick={prevSlide}
-              className="p-2.5 rounded-full border border-slate-300 dark:border-slate-800 hover:border-slate-455 dark:hover:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white transition-colors cursor-pointer"
+              className="p-2.5 rounded-full border border-slate-300 dark:border-zinc-800 hover:border-lime-600 dark:hover:border-lime-400 text-slate-650 dark:text-slate-400 hover:text-lime-650 dark:hover:text-lime-400 transition-colors cursor-pointer"
               aria-label="Previous testimonial"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={nextSlide}
-              className="p-2.5 rounded-full border border-slate-300 dark:border-slate-800 hover:border-slate-455 dark:hover:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white transition-colors cursor-pointer"
+              className="p-2.5 rounded-full border border-slate-300 dark:border-zinc-800 hover:border-lime-600 dark:hover:border-lime-400 text-slate-655 dark:text-slate-400 hover:text-lime-650 dark:hover:text-lime-400 transition-colors cursor-pointer"
               aria-label="Next testimonial"
             >
               <ChevronRight size={18} />

@@ -56,13 +56,13 @@ export default function AdminLoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-bg-dark text-slate-900 dark:text-white px-6 relative overflow-hidden">
       {/* Background gradients */}
-      <div className="absolute top-[20%] left-[-10%] w-[350px] h-[350px] rounded-full bg-violet-600/10 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[350px] h-[350px] rounded-full bg-cyan-600/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-[20%] left-[-10%] w-[350px] h-[350px] rounded-full bg-lime-500/10 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[350px] h-[350px] rounded-full bg-lime-550/10 blur-[100px] pointer-events-none" />
 
-      <div className="w-full max-w-md bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-850 rounded-3xl p-8 shadow-2xl relative z-10 space-y-6">
+      <div className="w-full max-w-md bg-white dark:bg-card-dark border border-slate-200 dark:border-zinc-800/80 rounded-3xl p-8 shadow-2xl relative z-10 space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="mx-auto w-12 h-12 rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 flex items-center justify-center text-white shadow-lg">
+          <div className="mx-auto w-12 h-12 rounded-2xl bg-gradient-to-tr from-lime-600 to-lime-450 dark:from-lime-500 dark:to-lime-300 flex items-center justify-center text-white dark:text-black shadow-lg shadow-lime-500/10">
             <Lock size={22} />
           </div>
           <h1 className="text-2xl font-extrabold tracking-tight">
@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Username */}
           <div className="space-y-1.5">
-            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-450">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Username
             </label>
             <div className="relative">
@@ -98,14 +98,14 @@ export default function AdminLoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-450 outline-none focus:border-violet-500 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-zinc-955/50 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-650 outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
               />
             </div>
           </div>
 
           {/* Password */}
           <div className="space-y-1.5">
-            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-450">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Password
             </label>
             <div className="relative">
@@ -116,7 +116,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-455 outline-none focus:border-violet-500 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-zinc-955/50 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-650 outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
               />
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-violet-650 hover:bg-violet-600 text-white font-bold text-sm shadow-md disabled:opacity-50 transition-all cursor-pointer active:scale-98"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black font-extrabold text-sm shadow-md dark:hover:shadow-[0_0_20px_rgba(163,230,53,0.25)] disabled:opacity-50 transition-all cursor-pointer active:scale-98"
           >
             {isSubmitting
               ? "Processing..."
@@ -136,10 +136,10 @@ export default function AdminLoginPage() {
         </form>
 
         {/* Switch Setup/Login Mode */}
-        <div className="text-center pt-2 border-t border-slate-200 dark:border-slate-850">
+        <div className="text-center pt-2 border-t border-slate-200 dark:border-zinc-800/80">
           <button
             onClick={() => setIsSetupMode(!isSetupMode)}
-            className="inline-flex items-center gap-1.5 text-xs text-violet-600 dark:text-violet-400 hover:underline font-semibold cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs text-lime-650 dark:text-lime-400 hover:underline font-semibold cursor-pointer"
           >
             <Sparkles size={12} />
             {isSetupMode ? "Back to standard login" : "Setup initial admin account"}

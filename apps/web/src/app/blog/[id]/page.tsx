@@ -45,7 +45,7 @@ export default function BlogArticlePage({ params }: PageProps) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-bg-dark text-slate-900 dark:text-white">
-        <div className="w-8 h-8 rounded-full border-4 border-violet-600 border-t-transparent animate-spin" />
+        <div className="w-8 h-8 rounded-full border-4 border-lime-600 border-t-transparent animate-spin" />
       </div>
     );
   }
@@ -68,7 +68,7 @@ export default function BlogArticlePage({ params }: PageProps) {
           const content = codeContent.join("\n");
           codeContent = [];
           return (
-            <pre key={idx} className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-100 font-mono text-xs overflow-x-auto my-6">
+            <pre key={idx} className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-slate-100 font-mono text-xs overflow-x-auto my-6">
               <code>{content}</code>
             </pre>
           );
@@ -127,21 +127,21 @@ export default function BlogArticlePage({ params }: PageProps) {
   return (
     <main className="min-h-screen pt-28 pb-20 bg-slate-50 dark:bg-bg-dark text-slate-900 dark:text-white">
       {/* Background gradients */}
-      <div className="absolute top-[10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-violet-600/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-lime-500/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-3xl mx-auto px-6 relative z-10 space-y-8">
         {/* Back Link */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-violet-500 transition-colors group"
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-lime-650 dark:hover:text-lime-400 transition-colors group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to Journal
         </Link>
 
         {/* Hero Area */}
-        <div className="space-y-4 border-b border-slate-200 dark:border-slate-850 pb-6">
-          <span className="text-[10px] text-violet-600 dark:text-violet-400 font-bold uppercase tracking-wider bg-violet-50 dark:bg-violet-950/40 px-2.5 py-1 rounded-full border border-violet-100 dark:border-violet-900/40 inline-block">
+        <div className="space-y-4 border-b border-slate-200 dark:border-zinc-800/80 pb-6">
+          <span className="text-[10px] text-lime-650 dark:text-lime-400 font-bold uppercase tracking-wider bg-lime-50 dark:bg-lime-950/20 px-2.5 py-1 rounded-full border border-lime-100 dark:border-lime-900/30 inline-block">
             {article.category}
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
@@ -162,7 +162,7 @@ export default function BlogArticlePage({ params }: PageProps) {
         </div>
 
         {/* Banner Image */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-850 overflow-hidden aspect-video shadow-md">
+        <div className="rounded-3xl border border-slate-205 dark:border-zinc-800/80 overflow-hidden aspect-video shadow-md">
           <img
             src={article.imageUrl}
             alt={article.title}
@@ -176,9 +176,9 @@ export default function BlogArticlePage({ params }: PageProps) {
         </article>
 
         {/* Recommendations */}
-        <div className="border-t border-slate-200 dark:border-slate-850 pt-12 space-y-6">
+        <div className="border-t border-slate-200 dark:border-zinc-800/80 pt-12 space-y-6">
           <h3 className="font-bold text-lg flex items-center gap-2">
-            <Rss size={20} className="text-violet-500" />
+            <Rss size={20} className="text-lime-600 dark:text-lime-400" />
             Continue Reading
           </h3>
           
@@ -187,13 +187,13 @@ export default function BlogArticlePage({ params }: PageProps) {
               <Link
                 key={post.id}
                 href={`/blog/${post.id}`}
-                className="block p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-850 hover:border-violet-500/40 dark:hover:border-violet-500/30 transition-all duration-350 shadow-sm hover:shadow group"
+                className="block p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800/80 hover:border-lime-500/40 dark:hover:border-lime-400/40 transition-all duration-350 shadow-sm hover:shadow group"
               >
                 <div className="space-y-2">
-                  <span className="text-[9px] text-violet-650 dark:text-violet-400 font-extrabold uppercase tracking-wider">
+                  <span className="text-[9px] text-lime-650 dark:text-lime-400 font-extrabold uppercase tracking-wider">
                     {post.category}
                   </span>
-                  <h4 className="font-bold text-sm md:text-base leading-tight text-slate-950 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                  <h4 className="font-bold text-sm md:text-base leading-tight text-slate-950 dark:text-white group-hover:text-lime-650 dark:group-hover:text-lime-400 transition-colors">
                     {post.title}
                   </h4>
                   <div className="flex justify-between items-center text-[10px] text-slate-400 font-bold uppercase tracking-wider pt-2">
@@ -201,7 +201,7 @@ export default function BlogArticlePage({ params }: PageProps) {
                       <Clock size={10} />
                       {post.readTime}
                     </span>
-                    <span className="flex items-center gap-0.5 text-violet-500 group-hover:translate-x-1 transition-transform">
+                    <span className="flex items-center gap-0.5 text-lime-600 dark:text-lime-400 group-hover:translate-x-1 transition-transform">
                       Read <ArrowRight size={10} />
                     </span>
                   </div>

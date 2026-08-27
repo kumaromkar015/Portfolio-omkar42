@@ -58,12 +58,12 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 md:py-28 bg-slate-50 dark:bg-bg-dark border-t border-slate-200 dark:border-slate-900 text-slate-900 dark:text-white"
+      className="py-20 md:py-28 bg-slate-50 dark:bg-bg-dark border-t border-slate-200 dark:border-zinc-900 text-slate-900 dark:text-white"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-300 border border-violet-200 dark:border-violet-850 inline-block uppercase tracking-wider">
+          <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-lime-100 dark:bg-lime-950/30 text-lime-750 dark:text-lime-400 border border-lime-300 dark:border-lime-500/20 inline-block uppercase tracking-wider">
             Case Studies
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
@@ -84,8 +84,8 @@ export default function Projects() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-violet-600 text-white shadow-lg shadow-violet-500/20"
-                    : "bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-350 dark:hover:border-slate-700"
+                    ? "bg-lime-600 border-lime-650 dark:bg-lime-400 dark:border-lime-350 text-white dark:text-black shadow-md dark:shadow-[0_0_12px_rgba(163,230,53,0.25)]"
+                    : "bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800/80 text-slate-655 dark:text-slate-400 hover:border-lime-500/30 dark:hover:border-lime-400/30"
                 }`}
               >
                 {cat}
@@ -100,7 +100,7 @@ export default function Projects() {
               placeholder="Search projects or stack..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 text-sm rounded-full bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-violet-500 transition-colors"
+              className="w-full px-4 py-2 text-sm rounded-full bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800/80 text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-lime-600 dark:focus:border-lime-400 transition-colors"
             />
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-850 rounded-3xl overflow-hidden shadow hover:shadow-2xl hover:border-violet-500/40 dark:hover:border-violet-500/30 transition-all duration-300 group flex flex-col justify-between"
+                className="bg-white dark:bg-card-dark border border-slate-200 dark:border-zinc-800/80 rounded-3xl overflow-hidden shadow hover:shadow-2xl hover:border-lime-500/40 dark:hover:border-lime-400/40 transition-all duration-300 group flex flex-col justify-between"
               >
                 {/* Project Image card with overlay */}
                 <div className="relative aspect-video overflow-hidden">
@@ -133,7 +133,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-white text-slate-900 hover:scale-110 transition-transform cursor-pointer"
+                      className="p-2.5 rounded-full bg-white text-slate-900 hover:bg-lime-400 hover:text-black hover:scale-110 transition-all cursor-pointer"
                       title="Live Demo"
                     >
                       <ExternalLink size={18} />
@@ -142,7 +142,7 @@ export default function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-white text-slate-900 hover:scale-110 transition-transform cursor-pointer"
+                      className="p-2.5 rounded-full bg-white text-slate-900 hover:bg-lime-400 hover:text-black hover:scale-110 transition-all cursor-pointer"
                       title="GitHub Repository"
                     >
                       <GithubIcon size={18} />
@@ -153,10 +153,10 @@ export default function Projects() {
                 {/* Content body */}
                 <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <span className="text-[10px] text-violet-600 dark:text-violet-400 font-bold uppercase tracking-wider bg-violet-50 dark:bg-violet-950/40 px-2.5 py-1 rounded-full border border-violet-100 dark:border-violet-900/40 inline-block">
+                    <span className="text-[10px] text-lime-650 dark:text-lime-400 font-bold uppercase tracking-wider bg-lime-50 dark:bg-lime-950/20 px-2.5 py-1 rounded-full border border-lime-100 dark:border-lime-900/30 inline-block">
                       {project.category}
                     </span>
-                    <h3 className="text-xl font-bold text-slate-950 dark:text-white leading-tight">
+                    <h3 className="text-xl font-bold text-slate-955 dark:text-white leading-tight">
                       {project.title}
                     </h3>
                     <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
@@ -169,7 +169,7 @@ export default function Projects() {
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-0.5 text-[10px] font-semibold rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800/80"
+                        className="px-2 py-0.5 text-[10px] font-semibold rounded bg-slate-100 dark:bg-zinc-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-zinc-800/80"
                       >
                         {tech}
                       </span>
@@ -177,10 +177,10 @@ export default function Projects() {
                   </div>
 
                   {/* Footer Links */}
-                  <div className="border-t border-slate-200 dark:border-slate-850 pt-4 flex justify-between items-center">
+                  <div className="border-t border-slate-200 dark:border-zinc-800/80 pt-4 flex justify-between items-center">
                     <Link
                       href={`/projects/${project.id}`}
-                      className="flex items-center gap-1 text-xs font-bold text-violet-600 dark:text-violet-400 hover:text-violet-500 transition-colors cursor-pointer group/link"
+                      className="flex items-center gap-1 text-xs font-bold text-lime-650 dark:text-lime-400 hover:text-lime-700 dark:hover:text-lime-300 transition-colors cursor-pointer group/link"
                     >
                       <BookOpen size={14} className="group-hover/link:-translate-y-[1px] transition-transform" />
                       Read Case Study
@@ -190,7 +190,7 @@ export default function Projects() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-slate-950 dark:hover:text-white transition-colors"
+                        className="text-slate-400 hover:text-lime-600 dark:hover:text-lime-400 transition-colors"
                         title="GitHub"
                       >
                         <GithubIcon size={16} />
@@ -199,7 +199,7 @@ export default function Projects() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-slate-950 dark:hover:text-white transition-colors"
+                        className="text-slate-400 hover:text-lime-600 dark:hover:text-lime-400 transition-colors"
                         title="Live"
                       >
                         <ArrowUpRight size={16} />
