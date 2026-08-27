@@ -21,11 +21,20 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
   }, []);
 
   const handleSelect = (media: any) => {
+    // Validate selected asset file type
+    if (typeFilter === "pdf" && !media.secureUrl.toLowerCase().endsWith(".pdf")) {
+      alert("Validation Error: Please select a valid PDF document asset.");
+      return;
+    }
+    if (typeFilter === "image" && media.secureUrl.toLowerCase().endsWith(".pdf")) {
+      alert("Validation Error: Please select an image asset, not a PDF.");
+      return;
+    }
     onChange(media.secureUrl);
     setIsOpen(false);
   };
 
-  const isImage = value && (value.match(/\.(jpg|jpeg|png|webp|gif)/i) || !value.endsWith(".pdf"));
+  const isImage = value && (value.match(/\.(jpg|jpeg|png|webp|gif)/i) || !value.toLowerCase().endsWith(".pdf"));
 
   const modalContent = isOpen && (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md overflow-hidden text-slate-900 dark:text-white">
@@ -51,7 +60,7 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
 
         {/* Modal Content Scroll Area */}
         <div className="flex-1 overflow-y-auto p-6 bg-slate-950/90">
-          <MediaLibrary onSelectMedia={handleSelect} selectedUrl={value} />
+          <MediaLibrary onSelectMedia={handleSelect} selectedUrl={value} typeFilter={typeFilter} />
         </div>
       </div>
     </div>

@@ -9,9 +9,10 @@ import { Search, Grid, UploadCloud, ChevronLeft, ChevronRight, Filter, Link2, Gl
 interface MediaLibraryProps {
   onSelectMedia?: (media: any) => void;
   selectedUrl?: string;
+  typeFilter?: "all" | "image" | "pdf";
 }
 
-export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibraryProps) {
+export default function MediaLibrary({ onSelectMedia, selectedUrl, typeFilter }: MediaLibraryProps) {
   const [activeTab, setActiveTab] = useState<"library" | "upload" | "url">("library");
   const [mediaList, setMediaList] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("all");         // 'all' | 'image' | 'pdf'
+  const [type, setType] = useState(typeFilter || "all");         // 'all' | 'image' | 'pdf'
   const [source, setSource] = useState("all");     // 'all' | 'cloudinary' | 'external'
   const [folder, setFolder] = useState("");
   const [limit] = useState(12);
@@ -210,20 +211,22 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
                 </select>
 
                 {/* Type filter */}
-                <select
-                  value={type}
-                  onChange={(e) => {
-                    setType(e.target.value);
-                    setPage(1);
-                  }}
-                  className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-905 dark:bg-zinc-950 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
-                >
-                  {types.map((t) => (
-                    <option key={t.value} value={t.value}>
-                      {t.label}
-                    </option>
-                  ))}
-                </select>
+                {!typeFilter && (
+                  <select
+                    value={type}
+                    onChange={(e) => {
+                      setType(e.target.value as "all" | "image" | "pdf");
+                      setPage(1);
+                    }}
+                    className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-905 dark:bg-zinc-950 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
+                  >
+                    {types.map((t) => (
+                      <option key={t.value} value={t.value}>
+                        {t.label}
+                      </option>
+                    ))}
+                  </select>
+                )}
                 
                 <button
                   type="button"

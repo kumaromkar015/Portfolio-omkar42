@@ -107,3 +107,52 @@ export const createContactSchema = z.object({
   subject: z.string().min(4, 'Subject must be at least 4 characters'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
+
+// ── Skills ───────────────────────────────────────────
+export const createSkillSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  category: z.enum(["Frontend", "Backend", "Database", "Languages", "Cloud & DevOps", "Tools & Design"]),
+  iconName: z.string().optional().default("Code2"),
+  iconUrl: z.string().optional().or(z.literal('')),
+  progress: z.number().min(0).max(100).optional().default(80),
+  experienceLevel: z.enum(["Expert", "Advanced", "Intermediate"]).optional().default("Advanced"),
+  years: z.number().min(0).optional().default(1),
+  displayOrder: z.number().optional().default(0),
+  featured: z.boolean().optional().default(false),
+  status: z.enum(["active", "inactive"]).optional().default("active"),
+});
+
+export const updateSkillSchema = createSkillSchema.partial();
+
+// ── SEO ──────────────────────────────────────────────
+export const pageSeoSchema = z.object({
+  title: z.string().optional().or(z.literal('')),
+  description: z.string().optional().or(z.literal('')),
+  canonicalUrl: z.string().optional().or(z.literal('')),
+  ogTitle: z.string().optional().or(z.literal('')),
+  ogDescription: z.string().optional().or(z.literal('')),
+  ogImage: z.string().optional().or(z.literal('')),
+  robots: z.string().optional().or(z.literal('')),
+});
+
+export const updateSeoSchema = z.object({
+  global: z.object({
+    siteTitle: z.string().min(1, 'Site Title is required'),
+    metaDescription: z.string().optional().or(z.literal('')),
+    siteUrl: z.string().optional().or(z.literal('')),
+    defaultOgImage: z.string().optional().or(z.literal('')),
+    robots: z.string().optional().or(z.literal('')),
+    author: z.string().optional().or(z.literal('')),
+    siteName: z.string().optional().or(z.literal('')),
+    keywords: z.array(z.string()).optional(),
+    twitterHandle: z.string().optional().or(z.literal('')),
+  }),
+  pages: z.object({
+    home: pageSeoSchema.optional(),
+    about: pageSeoSchema.optional(),
+    projects: pageSeoSchema.optional(),
+    services: pageSeoSchema.optional(),
+    blog: pageSeoSchema.optional(),
+    contact: pageSeoSchema.optional(),
+  }).optional(),
+});

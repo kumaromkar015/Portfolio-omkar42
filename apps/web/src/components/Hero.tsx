@@ -5,8 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowDown, FileText, Send, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./BrandIcons";
+import Image from "next/image";
 import { socialsData } from "@/data/socials";
-import SpotifyWidget from "./SpotifyWidget";
 import DynamicIcon from "./DynamicIcon";
 import { api } from "@/lib/api";
 
@@ -135,14 +135,24 @@ export default function Hero() {
             >
               View Projects
             </button>
-            <a
-              href={profile.resumeUrl || socialsData.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 rounded-full border border-slate-350 dark:border-zinc-800 text-slate-700 dark:text-slate-300 hover:border-lime-650 dark:hover:border-lime-400 hover:text-lime-655 dark:hover:text-lime-400 font-extrabold text-sm transition-all cursor-pointer shadow-sm bg-white/40 dark:bg-transparent"
-            >
-              Resume <FileText size={15} />
-            </a>
+            {profile.resumeUrl ? (
+              <a
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 rounded-full border border-slate-350 dark:border-zinc-800 text-slate-700 dark:text-slate-350 hover:border-lime-650 dark:hover:border-lime-400 hover:text-lime-655 dark:hover:text-lime-400 font-extrabold text-sm transition-all cursor-pointer shadow-sm bg-white/40 dark:bg-transparent"
+              >
+                Resume <FileText size={15} />
+              </a>
+            ) : (
+              <button
+                disabled
+                className="flex items-center gap-2 px-6 py-3 rounded-full border border-slate-200 dark:border-zinc-900 text-slate-400 dark:text-slate-600 font-extrabold text-sm cursor-not-allowed opacity-50 bg-slate-50/50 dark:bg-transparent"
+                title="Resume currently unavailable"
+              >
+                Resume <FileText size={15} />
+              </button>
+            )}
           </motion.div>
 
           {/* Socials Connection */}
@@ -205,33 +215,40 @@ export default function Hero() {
             className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl bg-gradient-to-tr from-lime-600 to-zinc-800 p-[1.5px] shadow-2xl flex items-center justify-center overflow-hidden"
           >
             {/* Visual Glassmorphic avatar placeholder */}
-            <div className="absolute inset-[1.5px] bg-slate-50 dark:bg-zinc-950 rounded-[22px] overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-              {/* Inner subtle glow */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-lime-500/10 dark:bg-lime-500/20 rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-slate-400/10 dark:bg-zinc-800/20 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute inset-[1.5px] bg-slate-50 dark:bg-zinc-950 rounded-[22px] overflow-hidden flex flex-col items-center justify-center text-center">
+              {profile.photo ? (
+                <div className="relative w-full h-full group/avatar">
+                  <Image
+                    src={profile.photo}
+                    alt={profile.name || "Omkar Kumar"}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority
+                    className="object-cover transition-transform duration-500 group-hover/avatar:scale-105"
+                  />
+                  {/* Subtle vignette/gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-80" />
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-6 w-full h-full relative">
+                  {/* Inner subtle glow */}
+                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-lime-500/10 dark:bg-lime-500/20 rounded-full blur-2xl pointer-events-none" />
+                  <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-slate-400/10 dark:bg-zinc-800/20 rounded-full blur-2xl pointer-events-none" />
 
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-lime-650 to-lime-500 dark:from-lime-500 dark:to-lime-300 flex items-center justify-center font-black text-white dark:text-black text-3xl shadow-lg mb-4">
-                OK
-              </div>
-              <span className="text-lg font-bold text-slate-900 dark:text-white">Omkar Kumar</span>
-              <span className="text-xs text-slate-550 dark:text-slate-400 font-semibold tracking-wider uppercase mt-1">
-                Bangalore, India
-              </span>
-              <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-350 bg-slate-200/50 dark:bg-zinc-900 px-3 py-1 rounded-full border border-slate-300/40 dark:border-zinc-800 shadow">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Working hours: {socialsData.workingHours}
-              </div>
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-lime-650 to-lime-500 dark:from-lime-500 dark:to-lime-300 flex items-center justify-center font-black text-white dark:text-black text-3xl shadow-lg mb-4">
+                    {profile.name ? profile.name.split(" ").map((n: string) => n[0]).join("") : "OK"}
+                  </div>
+                  <span className="text-lg font-bold text-slate-900 dark:text-white">{profile.name}</span>
+                  <span className="text-xs text-slate-550 dark:text-slate-400 font-semibold tracking-wider uppercase mt-1">
+                    Bangalore, India
+                  </span>
+                  <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-350 bg-slate-200/50 dark:bg-zinc-900 px-3 py-1 rounded-full border border-slate-300/40 dark:border-zinc-800 shadow">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    Working hours: {socialsData.workingHours}
+                  </div>
+                </div>
+              )}
             </div>
-          </motion.div>
-
-          {/* Spotify Widget integration */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="w-full max-w-xs"
-          >
-            <SpotifyWidget />
           </motion.div>
         </div>
       </div>

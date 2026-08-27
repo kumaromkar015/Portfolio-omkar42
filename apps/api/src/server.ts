@@ -18,6 +18,8 @@ import achievementRoutes from "./routes/achievement.js";
 import contactRoutes from "./routes/contact.js";
 import uploadRoutes from "./routes/upload.js";
 import mediaRoutes from "./routes/media.js";
+import skillsRoutes from "./routes/skills.js";
+import seoRoutes from "./routes/seo.js";
 
 // Validate critical environment variables
 const requiredEnvVars = ["MONGODB_URI", "JWT_SECRET"] as const;
@@ -69,6 +71,8 @@ app.use("/api/achievement", achievementRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/media", mediaRoutes);
+app.use("/api/skills", skillsRoutes);
+app.use("/api/seo", seoRoutes);
 
 // Health check
 app.get("/", (req, res) => {

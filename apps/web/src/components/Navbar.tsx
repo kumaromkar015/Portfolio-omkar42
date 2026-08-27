@@ -17,7 +17,7 @@ interface NavLink {
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [resumeUrl, setResumeUrl] = useState("/resume.pdf");
+  const [resumeUrl, setResumeUrl] = useState<string | null>(null);
   const pathname = usePathname();
 
   const navLinks: NavLink[] = [
@@ -43,9 +43,13 @@ export default function Navbar() {
       .then((data) => {
         if (data && data.resumeUrl) {
           setResumeUrl(data.resumeUrl);
+        } else {
+          setResumeUrl(null);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        setResumeUrl(null);
+      });
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -106,14 +110,16 @@ export default function Navbar() {
         {/* Right Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
-          <Link
-            href={resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black text-xs font-extrabold transition-all border border-lime-500/20 dark:border-lime-300/35 hover:shadow-lg dark:hover:shadow-[0_0_15px_rgba(163,230,53,0.3)] active:scale-95 cursor-pointer shadow-md"
-          >
-            Resume <ArrowUpRight size={14} />
-          </Link>
+          {resumeUrl && (
+            <Link
+              href={resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black text-xs font-extrabold transition-all border border-lime-500/20 dark:border-lime-300/35 hover:shadow-lg dark:hover:shadow-[0_0_15px_rgba(163,230,53,0.3)] active:scale-95 cursor-pointer shadow-md"
+            >
+              Resume <ArrowUpRight size={14} />
+            </Link>
+          )}
         </div>
 
         {/* Mobile Actions */}
@@ -150,15 +156,17 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href={resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black font-extrabold text-sm shadow-md cursor-pointer mt-2 transition-all active:scale-[0.98]"
-              >
-                Resume <ArrowUpRight size={16} />
-              </Link>
+              {resumeUrl && (
+                <Link
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black font-extrabold text-sm shadow-md cursor-pointer mt-2 transition-all active:scale-[0.98]"
+                >
+                  Resume <ArrowUpRight size={16} />
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { LogOut, Home, User, FolderKanban, FileText, Image as ImageIcon } from "lucide-react";
+import { LogOut, Home, User, FolderKanban, FileText, Image as ImageIcon, Sparkles, Globe } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [authorized, setAuthorized] = useState(false);
@@ -112,6 +112,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               }`}
             >
               <ImageIcon size={14} /> Media
+            </Link>
+            <Link
+              href="/admin/skills"
+              className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+                pathname === "/admin/skills"
+                  ? "text-lime-650 dark:text-lime-400"
+                  : "text-slate-400 hover:text-slate-205"
+              }`}
+            >
+              <Sparkles size={14} /> Skills
+            </Link>
+            <Link
+              href="/admin/seo"
+              className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+                pathname === "/admin/seo"
+                  ? "text-lime-650 dark:text-lime-400"
+                  : "text-slate-400 hover:text-slate-205"
+              }`}
+            >
+              <Globe size={14} /> SEO
             </Link>
           </nav>
         </div>

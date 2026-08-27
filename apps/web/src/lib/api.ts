@@ -96,6 +96,16 @@ export const api = {
   markMessageRead: (id: string) => request(`/contact/${id}`, { method: "PATCH" }),
   deleteMessage: (id: string) => request(`/contact/${id}`, { method: "DELETE" }),
 
+  // Skills CRUD
+  getSkills: () => request("/skills"),
+  createSkill: (data: any) => request("/skills", { method: "POST", body: JSON.stringify(data) }),
+  updateSkill: (id: string, data: any) => request(`/skills/${id}`, { method: "PUT", body: JSON.stringify(data) }),
+  deleteSkill: (id: string) => request(`/skills/${id}`, { method: "DELETE" }),
+
+  // SEO Management Singleton
+  getSeo: () => request("/seo"),
+  updateSeo: (data: any) => request("/seo", { method: "PUT", body: JSON.stringify(data) }),
+
   // Upload
   uploadImage: (image: string, folder?: string) =>
     request("/upload", { method: "POST", body: JSON.stringify({ image, folder }) }),
