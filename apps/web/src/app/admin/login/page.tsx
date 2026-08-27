@@ -32,7 +32,6 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setError("");
     setIsSubmitting(true);
-
     try {
       if (isSetupMode) {
         // Setup initial admin account
@@ -44,7 +43,9 @@ export default function AdminLoginPage() {
         const data = await api.login({ username, password });
         localStorage.setItem("admin_token", data.token);
         localStorage.setItem("admin_user", data.username);
-        router.push("/admin");
+        const searchParams = new URLSearchParams(window.location.search);
+        const redirect = searchParams.get("redirect") || "/admin";
+        router.push(redirect);
       }
     } catch (err: any) {
       setError(err.message || "Authentication process failed.");

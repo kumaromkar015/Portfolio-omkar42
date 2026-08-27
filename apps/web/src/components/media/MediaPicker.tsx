@@ -70,7 +70,7 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
             isImage ? (
               <Image src={value} alt="Preview" fill className="object-cover" />
             ) : (
-              <FileText className="text-violet-500 animate-pulse" size={24} />
+              <FileText className="text-lime-600 dark:text-lime-400 animate-pulse" size={24} />
             )
           ) : (
             <ImageIcon className="text-slate-800" size={24} />
@@ -91,7 +91,7 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
             <button
               type="button"
               onClick={() => setIsOpen(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold transition-colors cursor-pointer active:scale-95 shadow-md"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black text-xs font-bold transition-colors cursor-pointer active:scale-95 shadow-md"
             >
               <FolderOpen size={13} /> Select Asset
             </button>

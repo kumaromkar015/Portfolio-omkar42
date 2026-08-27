@@ -91,17 +91,17 @@ export default function MediaUrlInput({ onSuccess }: MediaUrlInputProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-slate-900/30 border border-slate-800 p-6 rounded-3xl">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-slate-905 dark:bg-zinc-900 border border-slate-205 dark:border-zinc-800/80 p-6 rounded-3xl">
       <div className="space-y-1.5">
-        <label className="text-xs font-bold uppercase tracking-wider text-slate-350 flex items-center gap-1.5">
-          <Link2 size={14} className="text-violet-500" /> Media URL
+        <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+          <Link2 size={14} className="text-lime-600 dark:text-lime-400" /> Media URL
         </label>
         <input
           type="text"
           placeholder="https://example.com/assets/my-photo.jpg"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          className="w-full px-4 py-2.5 text-xs font-semibold rounded-xl bg-slate-950 border border-slate-850 text-slate-200 outline-none focus:border-violet-500 transition-colors"
+          className="w-full px-4 py-2.5 text-xs font-semibold rounded-xl bg-slate-950 border border-slate-850 text-slate-200 outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
         />
         {error && (
           <p className="text-[10px] text-rose-500 font-semibold flex items-center gap-1 mt-1">
@@ -113,9 +113,9 @@ export default function MediaUrlInput({ onSuccess }: MediaUrlInputProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Media Type Select */}
         <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-350">Media Type</label>
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Media Type</label>
           <div className="flex flex-col gap-2 bg-slate-950/60 p-3 rounded-xl border border-slate-900">
-            <label className="flex items-center gap-2 text-xs font-bold text-slate-350 cursor-pointer">
+            <label className="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400 cursor-pointer">
               <input
                 type="radio"
                 name="resourceType"
@@ -124,11 +124,11 @@ export default function MediaUrlInput({ onSuccess }: MediaUrlInputProps) {
                   setResourceType("image");
                   setMimeType("image/jpeg");
                 }}
-                className="text-violet-600 focus:ring-violet-500 rounded-full"
+                className="text-lime-650 focus:ring-lime-500 rounded-full"
               />
               Image
             </label>
-            <label className="flex items-center gap-2 text-xs font-bold text-slate-350 cursor-pointer">
+            <label className="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400 cursor-pointer">
               <input
                 type="radio"
                 name="resourceType"
@@ -137,7 +137,7 @@ export default function MediaUrlInput({ onSuccess }: MediaUrlInputProps) {
                   setResourceType("raw");
                   setMimeType("application/pdf");
                 }}
-                className="text-violet-600 focus:ring-violet-500 rounded-full"
+                className="text-lime-650 focus:ring-lime-500 rounded-full"
               />
               PDF / Document
             </label>
@@ -146,7 +146,7 @@ export default function MediaUrlInput({ onSuccess }: MediaUrlInputProps) {
 
         {/* Live URL Preview Container */}
         <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-350">Live Preview</label>
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Live Preview</label>
           <div className="relative aspect-video w-full rounded-xl bg-slate-950 border border-slate-900 flex items-center justify-center overflow-hidden">
             {url && previewValid && !error ? (
               resourceType === "image" ? (
@@ -154,8 +154,8 @@ export default function MediaUrlInput({ onSuccess }: MediaUrlInputProps) {
                 <img src={url} alt="External Preview" className="object-cover w-full h-full" onError={() => setPreviewValid(false)} />
               ) : (
                 <div className="flex flex-col items-center text-slate-500 gap-1.5">
-                  <FileText size={28} className="text-violet-500" />
-                  <span className="text-[9px] font-bold uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded-full text-violet-400">PDF Document</span>
+                  <FileText size={28} className="text-lime-600 dark:text-lime-400" />
+                  <span className="text-[9px] font-bold uppercase tracking-wider bg-lime-500/10 px-2 py-0.5 rounded-full text-lime-600 dark:text-lime-400">PDF Document</span>
                 </div>
               )
             ) : (
@@ -171,7 +171,7 @@ export default function MediaUrlInput({ onSuccess }: MediaUrlInputProps) {
       <button
         type="submit"
         disabled={loading || !!error || !url}
-        className="w-full py-3 rounded-xl bg-violet-650 hover:bg-violet-600 text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-[0.98] disabled:opacity-40 cursor-pointer"
+        className="w-full py-3 rounded-xl bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black font-extrabold text-xs uppercase tracking-wider shadow-md transition-all active:scale-[0.98] disabled:opacity-40 cursor-pointer"
       >
         {loading ? "Adding External Media..." : "Add Media URL"}
       </button>

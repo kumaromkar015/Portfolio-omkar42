@@ -144,15 +144,15 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
   return (
     <div className="space-y-6">
       {/* Target Folder Selector */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/30 border border-slate-800 p-4 rounded-2xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-905 dark:bg-zinc-900 border border-slate-205 dark:border-zinc-800/80 p-4 rounded-2xl">
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-350">Target Folder</h4>
-          <p className="text-[10px] text-slate-500 font-semibold">Asset files will be organized under this directory.</p>
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Target Folder</h4>
+          <p className="text-[10px] text-slate-400 font-semibold">Asset files will be organized under this directory.</p>
         </div>
         <select
           value={folder}
           onChange={(e) => setFolder(e.target.value)}
-          className="w-full sm:w-auto px-4 py-2 text-xs font-bold rounded-xl bg-slate-950 border border-slate-800 text-slate-200 outline-none focus:border-violet-500"
+          className="w-full sm:w-auto px-4 py-2 text-xs font-bold rounded-xl bg-slate-950 border border-slate-805 text-slate-200 outline-none focus:border-lime-500"
         >
           {folders.map((f) => (
             <option key={f} value={f}>
@@ -171,8 +171,8 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
         onClick={triggerFileInput}
         className={`flex flex-col items-center justify-center p-8 md:p-12 rounded-3xl border-2 border-dashed cursor-pointer transition-all duration-300 text-center ${
           isDragActive
-            ? "border-violet-500 bg-violet-950/10 shadow-[0_0_20px_rgba(139,92,246,0.15)]"
-            : "border-slate-800 hover:border-slate-700 bg-slate-900/10"
+            ? "border-lime-500 bg-lime-950/10 shadow-[0_0_20px_rgba(163,230,53,0.15)]"
+            : "border-slate-300 dark:border-slate-800 hover:border-lime-500 dark:hover:border-lime-400 bg-slate-50/50 dark:bg-zinc-950/10"
         }`}
       >
         <input
@@ -183,16 +183,16 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
           multiple
           accept="image/*,.pdf"
         />
-        <UploadCloud size={40} className={`mb-3 ${isDragActive ? "text-violet-500 animate-bounce" : "text-slate-500"}`} />
-        <h3 className="text-sm font-bold text-slate-200 uppercase tracking-wider">Drag & Drop Files Here</h3>
+        <UploadCloud size={40} className={`mb-3 ${isDragActive ? "text-lime-500 animate-bounce" : "text-slate-400"}`} />
+        <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider">Drag & Drop Files Here</h3>
         <p className="text-[10px] font-semibold text-slate-500 mt-1.5 mb-3 uppercase tracking-wider">or</p>
         <button
           type="button"
-          className="px-4.5 py-2 text-xs font-bold text-white bg-violet-600 hover:bg-violet-500 rounded-xl shadow-md transition-all active:scale-[0.98]"
+          className="px-4.5 py-2 text-xs font-bold text-white dark:text-black bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 rounded-xl shadow-md transition-all active:scale-[0.98]"
         >
           Browse Files
         </button>
-        <span className="text-[9px] text-slate-600 font-semibold mt-4 uppercase tracking-wider">
+        <span className="text-[9px] text-slate-450 font-semibold mt-4 uppercase tracking-wider">
           JPEG, PNG, WEBP, GIF, PDF — Max 10MB
         </span>
       </div>
@@ -205,11 +205,11 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
             {tasks.map((task) => (
               <div
                 key={task.id}
-                className="flex items-center justify-between p-3.5 bg-slate-900/40 border border-slate-850 rounded-2xl gap-4 shadow-sm"
+                className="flex items-center justify-between p-3.5 bg-slate-905 dark:bg-zinc-900 border border-slate-205 dark:border-zinc-800/80 rounded-2xl gap-4 shadow-sm"
               >
                 <div className="flex-1 min-w-0 space-y-1">
                   <div className="flex justify-between items-center gap-2">
-                    <span className="text-xs font-bold text-slate-300 truncate" title={task.file.name}>
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300 truncate" title={task.file.name}>
                       {task.file.name}
                     </span>
                     <span className="text-[10px] font-bold text-slate-500">
@@ -221,7 +221,7 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
                   {task.status === "uploading" && (
                     <div className="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden">
                       <div
-                        className="bg-gradient-to-r from-violet-500 to-cyan-400 h-full rounded-full transition-all duration-300"
+                        className="bg-lime-500 h-full rounded-full transition-all duration-300"
                         style={{ width: `${task.progress}%` }}
                       />
                     </div>
@@ -245,7 +245,7 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
                   {task.status === "error" && (
                     <button
                       onClick={() => retryTask(task.id)}
-                      className="p-1.5 text-slate-500 hover:text-violet-400 rounded-lg hover:bg-slate-950"
+                      className="p-1.5 text-slate-500 hover:text-lime-650 dark:hover:text-lime-400 rounded-lg hover:bg-slate-950"
                       title="Retry"
                     >
                       <RefreshCw size={14} />
@@ -253,7 +253,7 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
                   )}
                   <button
                     onClick={() => removeTask(task.id)}
-                    className="p-1.5 text-slate-500 hover:text-rose-400 rounded-lg hover:bg-slate-950"
+                    className="p-1.5 text-slate-500 hover:text-rose-450 rounded-lg hover:bg-slate-950"
                     title="Remove"
                   >
                     <X size={14} />

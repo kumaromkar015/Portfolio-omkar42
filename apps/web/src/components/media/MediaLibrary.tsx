@@ -65,15 +65,15 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
         search,
         source,
       });
-      setMediaList(res.data || []);
+      setMediaList(res.media || []);
       setTotalPages(res.pagination?.totalPages || 1);
 
       // Pre-select matching or first item
-      if (res.data && res.data.length > 0) {
+      if (res.media && res.media.length > 0) {
         const matchingItem = selectedUrl 
-          ? res.data.find((item: any) => item.secureUrl === selectedUrl)
+          ? res.media.find((item: any) => item.secureUrl === selectedUrl)
           : null;
-        setSelectedItem(matchingItem || res.data[0]);
+        setSelectedItem(matchingItem || res.media[0]);
       } else {
         setSelectedItem(null);
       }
@@ -111,13 +111,13 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
   return (
     <div className="space-y-6">
       {/* Tab Selectors */}
-      <div className="flex justify-between items-center border-b border-slate-800 pb-2.5">
+      <div className="flex justify-between items-center border-b border-slate-205 dark:border-zinc-800/80 pb-2.5">
         <div className="flex gap-4">
           <button
             onClick={() => setActiveTab("library")}
             className={`flex items-center gap-1.5 pb-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 cursor-pointer ${
               activeTab === "library"
-                ? "border-violet-500 text-violet-500"
+                ? "border-lime-600 text-lime-650 dark:border-lime-400 dark:text-lime-400"
                 : "border-transparent text-slate-450 hover:text-slate-200"
             }`}
           >
@@ -127,7 +127,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
             onClick={() => setActiveTab("upload")}
             className={`flex items-center gap-1.5 pb-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 cursor-pointer ${
               activeTab === "upload"
-                ? "border-violet-500 text-violet-500"
+                ? "border-lime-600 text-lime-650 dark:border-lime-400 dark:text-lime-400"
                 : "border-transparent text-slate-450 hover:text-slate-200"
             }`}
           >
@@ -137,7 +137,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
             onClick={() => setActiveTab("url")}
             className={`flex items-center gap-1.5 pb-2.5 text-xs font-bold uppercase tracking-wider transition-colors border-b-2 cursor-pointer ${
               activeTab === "url"
-                ? "border-violet-500 text-violet-500"
+                ? "border-lime-600 text-lime-650 dark:border-lime-400 dark:text-lime-400"
                 : "border-transparent text-slate-450 hover:text-slate-200"
             }`}
           >
@@ -172,7 +172,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="w-full pl-10 pr-4 py-2.5 text-xs font-bold rounded-xl bg-slate-900 border border-slate-800 text-slate-200 outline-none focus:border-violet-500"
+                  className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-slate-905 dark:bg-zinc-950 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
                 />
               </div>
 
@@ -184,7 +184,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
                     setSource(e.target.value);
                     setPage(1);
                   }}
-                  className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-900 border border-slate-800 text-slate-300 outline-none focus:border-violet-500"
+                  className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-905 dark:bg-zinc-950 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
                 >
                   {sources.map((s) => (
                     <option key={s.value} value={s.value}>
@@ -200,7 +200,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
                     setFolder(e.target.value);
                     setPage(1);
                   }}
-                  className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-900 border border-slate-800 text-slate-300 outline-none focus:border-violet-500"
+                  className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-905 dark:bg-zinc-950 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
                 >
                   {folders.map((f) => (
                     <option key={f.value} value={f.value}>
@@ -216,7 +216,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
                     setType(e.target.value);
                     setPage(1);
                   }}
-                  className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-900 border border-slate-800 text-slate-300 outline-none focus:border-violet-500"
+                  className="px-3.5 py-2.5 text-xs font-bold rounded-xl bg-slate-905 dark:bg-zinc-950 border border-slate-205 dark:border-zinc-800 text-slate-900 dark:text-white outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
                 >
                   {types.map((t) => (
                     <option key={t.value} value={t.value}>
@@ -228,7 +228,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
                 <button
                   type="button"
                   onClick={handleSearchTrigger}
-                  className="px-4 py-2.5 text-xs font-bold text-white bg-violet-600 hover:bg-violet-500 rounded-xl transition-all cursor-pointer shadow-md"
+                  className="px-4 py-2.5 text-xs font-bold text-white dark:text-black bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 rounded-xl transition-all cursor-pointer shadow-md"
                 >
                   Search
                 </button>
@@ -312,7 +312,7 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl }: MediaLibrar
               <button
                 type="button"
                 onClick={() => onSelectMedia(selectedItem)}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all cursor-pointer active:scale-[0.99]"
+                className="w-full py-3.5 rounded-2xl bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-[0_0_20px_rgba(163,230,53,0.3)] transition-all cursor-pointer active:scale-[0.99]"
               >
                 Select File
               </button>

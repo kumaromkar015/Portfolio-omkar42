@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fafafa;
   --foreground: #09090b;
@@ -40,6 +42,16 @@
   --color-accent-lime-dim: #84cc16;
   --color-accent-lime-light: #bef264;
   --color-border-dark: #242427;
+  
+  --color-lime-650: #65a30d;
+  --color-lime-655: #4d7c0f;
+  --color-slate-205: #e4e4e7;
+  --color-slate-250: #cbd5e1;
+  --color-slate-450: #94a3b8;
+  --color-slate-550: #64748b;
+  --color-zinc-805: #27272a;
+  --color-zinc-850: #1f1f23;
+  --color-zinc-955: #09090b;
 }
 
 html,
@@ -75,17 +87,15 @@ body {
 
 /* Glassmorphism utility */
 .glass {
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-light {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass {
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Mouse Glow Effect helper */

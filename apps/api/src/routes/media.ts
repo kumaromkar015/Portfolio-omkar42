@@ -187,12 +187,14 @@ router.get(
 
     res.json({
       success: true,
-      data: mediaList,
-      pagination: {
-        page,
-        limit,
-        total,
-        totalPages,
+      data: {
+        media: mediaList,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages,
+        },
       },
     });
   })

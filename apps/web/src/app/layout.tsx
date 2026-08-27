@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
-import ScrollProgressBar from "@/components/ScrollProgressBar";
-import CommandPalette from "@/components/CommandPalette";
+import LayoutClientWrapper from "@/components/LayoutClientWrapper";
 import { seoData } from "@/data/seo";
 import "./globals.css";
 
@@ -58,14 +54,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ScrollProgressBar />
-          <CustomCursor />
-          <Navbar />
-          <div className="flex-1">
+          <LayoutClientWrapper>
             {children}
-          </div>
-          <Footer />
-          <CommandPalette />
+          </LayoutClientWrapper>
         </ThemeProvider>
       </body>
     </html>
