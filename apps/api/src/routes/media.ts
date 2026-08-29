@@ -157,6 +157,10 @@ router.get(
         query.resourceType = "image";
       } else if (type === "pdf") {
         query.type = "application/pdf";
+      } else if (type === "video") {
+        query.type = { $regex: "^video/", $options: "i" };
+      } else if (type === "audio") {
+        query.type = { $regex: "^audio/", $options: "i" };
       }
     }
 

@@ -9,7 +9,7 @@ interface MediaPickerProps {
   value: string;
   onChange: (url: string) => void;
   label: string;
-  typeFilter?: "all" | "image" | "pdf";
+  typeFilter?: "all" | "image" | "pdf" | "audio" | "video";
 }
 
 export default function MediaPicker({ value, onChange, label, typeFilter = "all" }: MediaPickerProps) {
@@ -33,12 +33,33 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
       media.type?.startsWith("image/") ||
       media.secureUrl.match(/\.(jpg|jpeg|png|webp|gif)/i);
 
+    const isSelectedAudio = 
+      media.format?.toLowerCase() === "mp3" ||
+      media.format?.toLowerCase() === "wav" ||
+      media.format?.toLowerCase() === "ogg" ||
+      media.format?.toLowerCase() === "m4a" ||
+      media.type?.startsWith("audio/") ||
+      media.secureUrl.match(/\.(mp3|wav|ogg|m4a)$/i);
+
+    const isSelectedVideo = 
+      media.resourceType === "video" ||
+      media.type?.startsWith("video/") ||
+      media.secureUrl.match(/\.(mp4|webm|ogg|mov|avi)$/i);
+
     if (typeFilter === "pdf" && !isSelectedPdf) {
       alert("Validation Error: Please select a valid PDF document asset.");
       return;
     }
     if (typeFilter === "image" && !isSelectedImage) {
       alert("Validation Error: Please select an image asset, not a PDF.");
+      return;
+    }
+    if (typeFilter === "audio" && !isSelectedAudio) {
+      alert("Validation Error: Please select a valid Audio asset.");
+      return;
+    }
+    if (typeFilter === "video" && !isSelectedVideo) {
+      alert("Validation Error: Please select a valid Video asset.");
       return;
     }
     onChange(media.secureUrl);

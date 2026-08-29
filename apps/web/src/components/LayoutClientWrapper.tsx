@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import CustomCursor from "./CustomCursor";
 import ScrollProgressBar from "./ScrollProgressBar";
 import CommandPalette from "./CommandPalette";
+import MusicPlayer from "./MusicPlayer";
 
 export default function LayoutClientWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -24,6 +25,7 @@ export default function LayoutClientWrapper({ children }: { children: React.Reac
       <div className="flex-grow flex flex-col relative">{children}</div>
       <Footer />
       <CommandPalette />
+      <MusicPlayer />
     </>
   );
 }

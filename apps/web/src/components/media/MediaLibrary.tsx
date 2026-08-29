@@ -9,7 +9,7 @@ import { Search, Grid, UploadCloud, ChevronLeft, ChevronRight, Filter, Link2, Gl
 interface MediaLibraryProps {
   onSelectMedia?: (media: any) => void;
   selectedUrl?: string;
-  typeFilter?: "all" | "image" | "pdf";
+  typeFilter?: "all" | "image" | "pdf" | "audio" | "video";
 }
 
 export default function MediaLibrary({ onSelectMedia, selectedUrl, typeFilter }: MediaLibraryProps) {
@@ -34,13 +34,16 @@ export default function MediaLibrary({ onSelectMedia, selectedUrl, typeFilter }:
     { label: "Projects", value: "portfolio/projects" },
     { label: "Blog", value: "portfolio/blog" },
     { label: "Resume", value: "portfolio/resume" },
+    { label: "Audio", value: "portfolio/audio" },
     { label: "External URL", value: "portfolio/external" },
   ];
 
   const types = [
     { label: "All Types", value: "all" },
     { label: "Images", value: "image" },
-    { label: "PDFs", value: "pdf" },
+    { label: "Videos", value: "video" },
+    { label: "Documents (PDF)", value: "pdf" },
+    { label: "Audio", value: "audio" },
   ];
 
   const sources = [

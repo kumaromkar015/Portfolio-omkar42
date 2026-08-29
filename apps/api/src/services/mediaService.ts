@@ -16,7 +16,11 @@ export class MediaService {
   ): Promise<IMedia> {
     // Validate MIME types and file extensions
     const fileExt = originalName.split(".").pop()?.toLowerCase();
-    const allowedExtensions = ["jpg", "jpeg", "png", "webp", "gif", "pdf", "mp4", "webm", "ogg", "mov", "avi"];
+    const allowedExtensions = [
+      "jpg", "jpeg", "png", "webp", "gif", "pdf", 
+      "mp4", "webm", "ogg", "mov", "avi", 
+      "mp3", "wav", "m4a"
+    ];
     const allowedMimeTypes = [
       "image/jpeg",
       "image/png",
@@ -27,29 +31,36 @@ export class MediaService {
       "video/webm",
       "video/ogg",
       "video/quicktime",
-      "video/x-msvideo"
+      "video/x-msvideo",
+      "audio/mpeg",
+      "audio/wav",
+      "audio/mp3",
+      "audio/ogg",
+      "audio/mp4",
+      "audio/x-m4a"
     ];
 
     if (!fileExt || !allowedExtensions.includes(fileExt)) {
       throw new AppError(
-        "Invalid file extension. Allowed types: JPG, JPEG, PNG, WEBP, GIF, PDF, MP4, WEBM, OGG, MOV, AVI",
+        "Invalid file extension. Allowed types: JPG, JPEG, PNG, WEBP, GIF, PDF, MP4, WEBM, OGG, MOV, AVI, MP3, WAV, M4A",
         400
       );
     }
 
     if (!allowedMimeTypes.includes(mimeType)) {
       throw new AppError(
-        "Invalid MIME type. Allowed types: JPG, JPEG, PNG, WEBP, GIF, PDF, MP4, WEBM, OGG, MOV, AVI",
+        "Invalid MIME type. Allowed types: JPG, JPEG, PNG, WEBP, GIF, PDF, MP4, WEBM, OGG, MOV, AVI, MP3, WAV, M4A",
         400
       );
     }
 
     const isPdf = mimeType === "application/pdf" || fileExt === "pdf";
     const isVideo = mimeType.startsWith("video/") || ["mp4", "webm", "ogg", "mov", "avi"].includes(fileExt);
+    const isAudio = mimeType.startsWith("audio/") || ["mp3", "wav", "m4a", "ogg"].includes(fileExt);
 
     let resourceType = "image";
     if (isPdf) resourceType = "raw";
-    else if (isVideo) resourceType = "video";
+    else if (isVideo || isAudio) resourceType = "video";
 
     const options: any = {
       folder: folder || "portfolio/general",
