@@ -119,7 +119,8 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-card-dark border border-slate-200 dark:border-zinc-800/80 rounded-3xl overflow-hidden shadow hover:shadow-2xl hover:border-lime-500/40 dark:hover:border-lime-400/40 transition-all duration-300 group flex flex-col justify-between"
+                className="bg-white dark:bg-card-dark border border-slate-200 dark:border-zinc-800/80 rounded-3xl overflow-hidden shadow hover:shadow-2xl hover:border-lime-500/40 dark:hover:border-lime-400/40 transition-all duration-300 group flex flex-col justify-between project-card"
+                data-cursor="project"
               >
                 {/* Project Image card with overlay */}
                 <div className="relative aspect-video overflow-hidden">

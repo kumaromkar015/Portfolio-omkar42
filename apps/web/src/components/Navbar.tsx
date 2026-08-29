@@ -29,6 +29,7 @@ export default function Navbar() {
     { label: "Projects", href: "/#projects", isSection: true },
     { label: "Services", href: "/#services", isSection: true },
     { label: "Blog", href: "/blog", isSection: false },
+    { label: "Gallery", href: "/gallery", isSection: false },
     { label: "Contact", href: "/#contact", isSection: true },
   ];
 

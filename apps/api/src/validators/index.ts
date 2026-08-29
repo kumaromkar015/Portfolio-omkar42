@@ -156,3 +156,19 @@ export const updateSeoSchema = z.object({
     contact: pageSeoSchema.optional(),
   }).optional(),
 });
+
+// ── Gallery ──────────────────────────────────────────
+export const createGalleryItemSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  description: z.string().optional(),
+  imageUrl: z.string().url('Invalid image URL'),
+  category: z.enum(["professional", "work", "events", "achievements", "journey"]),
+  date: z.string().optional().or(z.literal('')),
+  location: z.string().optional(),
+  altText: z.string().optional(),
+  isFeatured: z.boolean().optional().default(false),
+  displayOrder: z.number().optional().default(0),
+  isVisible: z.boolean().optional().default(true),
+});
+
+export const updateGalleryItemSchema = createGalleryItemSchema.partial();

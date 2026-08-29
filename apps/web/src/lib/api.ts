@@ -142,4 +142,15 @@ export const api = {
   },
   deleteMedia: (id: string) => request(`/media/${id}`, { method: "DELETE" }),
   getMediaReferences: (id: string) => request(`/media/${id}/references`),
+
+  // Gallery CRUD
+  getGalleryItems: (params?: { category?: string; all?: boolean }) => {
+    const query = new URLSearchParams();
+    if (params?.category) query.append("category", params.category);
+    if (params?.all) query.append("all", String(params.all));
+    return request(`/gallery?${query.toString()}`);
+  },
+  createGalleryItem: (data: any) => request("/gallery", { method: "POST", body: JSON.stringify(data) }),
+  updateGalleryItem: (id: string, data: any) => request(`/gallery/${id}`, { method: "PUT", body: JSON.stringify(data) }),
+  deleteGalleryItem: (id: string) => request(`/gallery/${id}`, { method: "DELETE" }),
 };
