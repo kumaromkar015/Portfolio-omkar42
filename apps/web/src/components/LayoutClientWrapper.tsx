@@ -8,6 +8,7 @@ import CustomCursor from "./CustomCursor";
 import ScrollProgressBar from "./ScrollProgressBar";
 import CommandPalette from "./CommandPalette";
 import MusicPlayer from "./MusicPlayer";
+import InteractiveBackground from "./InteractiveBackground";
 
 export default function LayoutClientWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -26,6 +27,7 @@ export default function LayoutClientWrapper({ children }: { children: React.Reac
       <Footer />
       <CommandPalette />
       <MusicPlayer />
+      <InteractiveBackground />
     </>
   );
 }

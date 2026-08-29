@@ -7,11 +7,16 @@ import { asyncHandler, AppError } from "../middleware/errorHandler.js";
 
 const router = Router();
 
-// Get Experiences
+// Get Timeline Entries (Experience)
 router.get(
   "/",
   asyncHandler(async (req: Request, res: Response) => {
-    const experiences = await Experience.find().sort({ createdAt: -1 });
+    const all = req.query.all === "true";
+    const query: any = {};
+    if (!all) {
+      query.isVisible = true;
+    }
+    const experiences = await Experience.find(query).sort({ displayOrder: 1, createdAt: -1 });
     res.json({ success: true, data: experiences });
   })
 );

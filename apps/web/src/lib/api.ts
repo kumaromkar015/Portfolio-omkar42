@@ -73,7 +73,7 @@ export const api = {
   deleteBlog: (id: string) => request(`/blog/${id}`, { method: "DELETE" }),
 
   // Experience
-  getExperiences: () => request("/experience"),
+  getExperiences: (all = false) => request(`/experience?all=${all}`),
   createExperience: (data: any) => request("/experience", { method: "POST", body: JSON.stringify(data) }),
   updateExperience: (id: string, data: any) => request(`/experience/${id}`, { method: "PUT", body: JSON.stringify(data) }),
   deleteExperience: (id: string) => request(`/experience/${id}`, { method: "DELETE" }),

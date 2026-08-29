@@ -68,12 +68,16 @@ export const updateBlogSchema = createBlogSchema.partial();
 
 // ── Experience ───────────────────────────────────────
 export const createExperienceSchema = z.object({
-  company: z.string().min(1, 'Company is required'),
-  position: z.string().min(1, 'Position is required'),
-  duration: z.string().min(1, 'Duration is required'),
-  responsibilities: z.array(z.string()).optional(),
-  technologies: z.array(z.string()).optional(),
-  achievements: z.array(z.string()).optional(),
+  company: z.string().min(1, 'Company/Organization is required'),
+  position: z.string().min(1, 'Position/Role/Degree is required'),
+  duration: z.string().min(1, 'Duration/Date is required'),
+  responsibilities: z.array(z.string()).optional().default([]),
+  technologies: z.array(z.string()).optional().default([]),
+  achievements: z.array(z.string()).optional().default([]),
+  type: z.enum(["work", "education", "project", "goal"]).optional().default("work"),
+  displayOrder: z.number().optional().default(0),
+  isVisible: z.boolean().optional().default(true),
+  imageUrl: z.string().optional().or(z.literal('')),
 });
 
 export const updateExperienceSchema = createExperienceSchema.partial();
