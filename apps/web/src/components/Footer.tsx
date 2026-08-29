@@ -141,8 +141,14 @@ export default function Footer() {
           <div className="text-xs text-slate-500 dark:text-slate-400 text-center md:text-right">
             <p>© {year} Omkar Kumar. All rights reserved.</p>
             <p className="mt-1">
-              Built with <span className="text-lime-605 dark:text-lime-400 font-semibold">Next.js 16</span>, TypeScript & Tailwind CSS.
+              Built with <span className="text-lime-650 dark:text-lime-400 font-semibold">Next.js 16</span>, TypeScript & Tailwind CSS.
             </p>
+            <button
+              onClick={() => window.dispatchEvent(new Event("toggle-terminal"))}
+              className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded bg-lime-500/10 text-lime-650 dark:text-lime-400 hover:bg-lime-500 hover:text-black transition-colors font-mono font-bold text-[10px] uppercase tracking-wider cursor-pointer border border-lime-500/20"
+            >
+              [ Terminal Mode ]
+            </button>
           </div>
         </div>
       </div>
