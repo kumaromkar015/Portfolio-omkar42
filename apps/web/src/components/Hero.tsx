@@ -9,6 +9,7 @@ import Image from "next/image";
 import { socialsData } from "@/data/socials";
 import DynamicIcon from "./DynamicIcon";
 import { api } from "@/lib/api";
+import { parseMediaUrl } from "@/lib/cloudinary";
 
 export default function Hero() {
   const [profile, setProfile] = React.useState<any>({
@@ -137,7 +138,8 @@ export default function Hero() {
             </button>
             {profile.resumeUrl ? (
               <a
-                href={profile.resumeUrl}
+                href={parseMediaUrl(profile.resumeUrl)?.downloadUrl || profile.resumeUrl}
+                download={parseMediaUrl(profile.resumeUrl)?.fileName || "Omkar_Resume.pdf"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-3 rounded-full border border-slate-350 dark:border-zinc-800 text-slate-700 dark:text-slate-350 hover:border-lime-650 dark:hover:border-lime-400 hover:text-lime-655 dark:hover:text-lime-400 font-extrabold text-sm transition-all cursor-pointer shadow-sm bg-white/40 dark:bg-transparent"

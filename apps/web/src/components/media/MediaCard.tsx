@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { FileText, Globe, Cloud } from "lucide-react";
+import { FileText, Globe, Cloud, Film } from "lucide-react";
 
 interface MediaCardProps {
   media: {
@@ -33,6 +33,7 @@ export function formatBytes(bytes?: number, decimals = 2) {
 
 export default function MediaCard({ media, isSelected, onClick }: MediaCardProps) {
   const isImage = media.resourceType === "image";
+  const isVideo = media.resourceType === "video" || media.type?.startsWith("video/");
   const sizeStr = formatBytes(media.bytes);
   const isExternal = media.source === "external";
   const filename = media.originalFilename || "external-media";
@@ -56,6 +57,15 @@ export default function MediaCard({ media, isSelected, onClick }: MediaCardProps
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
+        ) : isVideo ? (
+          <div className="flex flex-col items-center justify-center text-slate-500 space-y-2">
+            <Film size={36} className="text-violet-500" />
+            {media.format && (
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded-full">
+                {media.format}
+              </span>
+            )}
+          </div>
         ) : (
           <div className="flex flex-col items-center justify-center text-slate-500 space-y-2">
             <FileText size={36} className="text-violet-500 animate-pulse" />

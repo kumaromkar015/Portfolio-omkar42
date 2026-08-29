@@ -14,29 +14,55 @@ export class MediaService {
     folder: string,
     userId?: string
   ): Promise<IMedia> {
-    // Validate MIME types
+    // Validate MIME types and file extensions
+    const fileExt = originalName.split(".").pop()?.toLowerCase();
+    const allowedExtensions = ["jpg", "jpeg", "png", "webp", "gif", "pdf", "mp4", "webm", "ogg", "mov", "avi"];
     const allowedMimeTypes = [
       "image/jpeg",
       "image/png",
       "image/webp",
       "image/gif",
       "application/pdf",
+      "video/mp4",
+      "video/webm",
+      "video/ogg",
+      "video/quicktime",
+      "video/x-msvideo"
     ];
 
-    if (!allowedMimeTypes.includes(mimeType)) {
+    if (!fileExt || !allowedExtensions.includes(fileExt)) {
       throw new AppError(
-        "Invalid file type. Allowed types: JPG, PNG, WEBP, GIF, PDF",
+        "Invalid file extension. Allowed types: JPG, JPEG, PNG, WEBP, GIF, PDF, MP4, WEBM, OGG, MOV, AVI",
         400
       );
     }
 
-    const isPdf = mimeType === "application/pdf";
-    const resourceType = isPdf ? "raw" : "image";
+    if (!allowedMimeTypes.includes(mimeType)) {
+      throw new AppError(
+        "Invalid MIME type. Allowed types: JPG, JPEG, PNG, WEBP, GIF, PDF, MP4, WEBM, OGG, MOV, AVI",
+        400
+      );
+    }
+
+    const isPdf = mimeType === "application/pdf" || fileExt === "pdf";
+    const isVideo = mimeType.startsWith("video/") || ["mp4", "webm", "ogg", "mov", "avi"].includes(fileExt);
+
+    let resourceType = "image";
+    if (isPdf) resourceType = "raw";
+    else if (isVideo) resourceType = "video";
 
     const options: any = {
       folder: folder || "portfolio/general",
       resource_type: resourceType,
     };
+
+    if (isPdf) {
+      const fileExt = originalName.split(".").pop() || "pdf";
+      const baseName = originalName
+        .replace(/\.[^/.]+$/, "")
+        .replace(/[^a-zA-Z0-9-_]/g, "_"); // sanitize filename characters
+      options.public_id = `${baseName}_${Math.round(Date.now() / 1000)}.${fileExt}`;
+    }
 
     // Auto transformation for images only (PDFs/raw files will fail transformations)
     if (resourceType === "image") {

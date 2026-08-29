@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { Save, CheckCircle, AlertCircle } from "lucide-react";
 import MediaPicker from "@/components/media/MediaPicker";
+import { parseMediaUrl } from "@/lib/cloudinary";
 
 export default function AdminProfilePage() {
   const [loading, setLoading] = useState(false);
@@ -136,12 +137,50 @@ export default function AdminProfilePage() {
               onChange={setProfilePhoto}
               typeFilter="image"
             />
-            <MediaPicker
-              label="Resume PDF"
-              value={profileResumeUrl}
-              onChange={setProfileResumeUrl}
-              typeFilter="pdf"
-            />
+            <div className="space-y-4">
+              <MediaPicker
+                label="Resume PDF"
+                value={profileResumeUrl}
+                onChange={setProfileResumeUrl}
+                typeFilter="pdf"
+              />
+              
+              {profileResumeUrl && (
+                <div className="border border-slate-800 rounded-2xl p-4 bg-slate-950/40 space-y-4">
+                  <div className="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-slate-400">
+                    <span>Resume Preview</span>
+                    <span className="text-[10px] text-lime-400 font-semibold uppercase tracking-wider bg-lime-500/10 px-2 py-0.5 rounded-full">PDF Document</span>
+                  </div>
+                  
+                  {/* Embed PDF Viewer */}
+                  <div className="relative w-full h-[250px] border border-slate-850 rounded-xl overflow-hidden bg-slate-950">
+                    <iframe
+                      src={`${profileResumeUrl}#toolbar=0&navpanes=0`}
+                      className="w-full h-full border-0"
+                      title="Resume PDF Preview"
+                    />
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a
+                      href={profileResumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-center py-2 px-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-350 hover:text-white font-extrabold text-xs uppercase tracking-wider transition-colors"
+                    >
+                      Open PDF
+                    </a>
+                    <a
+                      href={parseMediaUrl(profileResumeUrl)?.downloadUrl || profileResumeUrl}
+                      download={parseMediaUrl(profileResumeUrl)?.fileName || "Omkar_Resume.pdf"}
+                      className="flex-1 text-center py-2 px-4 rounded-xl bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black font-extrabold text-xs uppercase tracking-wider transition-colors"
+                    >
+                      Download PDF
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <button

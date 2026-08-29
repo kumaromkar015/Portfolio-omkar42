@@ -7,6 +7,7 @@ import { Menu, X, ArrowUpRight, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import { api } from "@/lib/api";
+import { parseMediaUrl } from "@/lib/cloudinary";
 
 interface NavLink {
   label: string;
@@ -112,7 +113,8 @@ export default function Navbar() {
           <ThemeToggle />
           {resumeUrl && (
             <Link
-              href={resumeUrl}
+              href={parseMediaUrl(resumeUrl)?.downloadUrl || resumeUrl}
+              download={parseMediaUrl(resumeUrl)?.fileName || "Omkar_Resume.pdf"}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-4.5 py-2.5 rounded-full bg-lime-600 hover:bg-lime-700 dark:bg-lime-400 dark:hover:bg-lime-300 text-white dark:text-black text-xs font-extrabold transition-all border border-lime-500/20 dark:border-lime-300/35 hover:shadow-lg dark:hover:shadow-[0_0_15px_rgba(163,230,53,0.3)] active:scale-95 cursor-pointer shadow-md"
@@ -158,7 +160,8 @@ export default function Navbar() {
               ))}
               {resumeUrl && (
                 <Link
-                  href={resumeUrl}
+                  href={parseMediaUrl(resumeUrl)?.downloadUrl || resumeUrl}
+                  download={parseMediaUrl(resumeUrl)?.fileName || "Omkar_Resume.pdf"}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}

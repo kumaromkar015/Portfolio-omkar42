@@ -60,7 +60,18 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
   };
 
   const addFiles = (files: File[]) => {
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"];
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+      "application/pdf",
+      "video/mp4",
+      "video/webm",
+      "video/ogg",
+      "video/quicktime",
+      "video/x-msvideo"
+    ];
     const maxSizeBytes = 10 * 1024 * 1024; // 10MB
 
     const newTasks: UploadTask[] = files.map((file) => {
@@ -68,7 +79,7 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
       let status: UploadTask["status"] = "pending";
 
       if (!allowedTypes.includes(file.type)) {
-        errorMsg = "Invalid format. Allowed: JPG, PNG, WEBP, GIF, PDF";
+        errorMsg = "Invalid format. Allowed: JPG, PNG, WEBP, GIF, PDF, MP4, WEBM, OGG, MOV, AVI";
         status = "error";
       } else if (file.size > maxSizeBytes) {
         errorMsg = "Size exceeds 10MB limit";
@@ -181,10 +192,10 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
           onChange={handleFileInput}
           className="hidden"
           multiple
-          accept="image/*,.pdf"
+          accept="image/*,.pdf,video/*"
         />
         <UploadCloud size={40} className={`mb-3 ${isDragActive ? "text-lime-500 animate-bounce" : "text-slate-400"}`} />
-        <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider">Drag & Drop Files Here</h3>
+        <h3 className="text-sm font-bold text-slate-700 dark:text-slate-205 uppercase tracking-wider">Drag & Drop Files Here</h3>
         <p className="text-[10px] font-semibold text-slate-500 mt-1.5 mb-3 uppercase tracking-wider">or</p>
         <button
           type="button"
@@ -193,7 +204,7 @@ export default function MediaUploader({ defaultFolder = "portfolio/general", onU
           Browse Files
         </button>
         <span className="text-[9px] text-slate-450 font-semibold mt-4 uppercase tracking-wider">
-          JPEG, PNG, WEBP, GIF, PDF — Max 10MB
+          JPEG, PNG, WEBP, GIF, PDF, MP4, WEBM — Max 10MB
         </span>
       </div>
 

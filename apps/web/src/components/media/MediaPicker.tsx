@@ -3,6 +3,7 @@ import Image from "next/image";
 import { createPortal } from "react-dom";
 import MediaLibrary from "./MediaLibrary";
 import { FolderOpen, X, Image as ImageIcon, FileText } from "lucide-react";
+import { parseMediaUrl } from "@/lib/cloudinary";
 
 interface MediaPickerProps {
   value: string;
@@ -22,11 +23,21 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
 
   const handleSelect = (media: any) => {
     // Validate selected asset file type
-    if (typeFilter === "pdf" && !media.secureUrl.toLowerCase().endsWith(".pdf")) {
+    const isSelectedPdf = 
+      media.format?.toLowerCase() === "pdf" || 
+      media.type?.toLowerCase() === "application/pdf" ||
+      media.secureUrl.toLowerCase().endsWith(".pdf");
+
+    const isSelectedImage = 
+      media.resourceType === "image" ||
+      media.type?.startsWith("image/") ||
+      media.secureUrl.match(/\.(jpg|jpeg|png|webp|gif)/i);
+
+    if (typeFilter === "pdf" && !isSelectedPdf) {
       alert("Validation Error: Please select a valid PDF document asset.");
       return;
     }
-    if (typeFilter === "image" && media.secureUrl.toLowerCase().endsWith(".pdf")) {
+    if (typeFilter === "image" && !isSelectedImage) {
       alert("Validation Error: Please select an image asset, not a PDF.");
       return;
     }
@@ -34,7 +45,8 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
     setIsOpen(false);
   };
 
-  const isImage = value && (value.match(/\.(jpg|jpeg|png|webp|gif)/i) || !value.toLowerCase().endsWith(".pdf"));
+  const mediaInfo = parseMediaUrl(value);
+  const isImage = value ? (mediaInfo ? mediaInfo.resourceType === "image" : true) : false;
 
   const modalContent = isOpen && (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md overflow-hidden text-slate-900 dark:text-white">
@@ -90,10 +102,10 @@ export default function MediaPicker({ value, onChange, label, typeFilter = "all"
         <div className="flex-1 w-full space-y-2">
           <input
             type="text"
-            readOnly
             placeholder="No media asset selected"
             value={value}
-            className="w-full px-4 py-2 text-xs font-semibold rounded-xl bg-slate-950 border border-slate-850 text-slate-450 outline-none select-all"
+            onChange={(e) => onChange(e.target.value)}
+            className="w-full px-4 py-2 text-xs font-semibold rounded-xl bg-slate-950 border border-slate-850 text-slate-200 outline-none placeholder-slate-600 focus:border-lime-500 transition-colors"
           />
 
           <div className="flex gap-2">
