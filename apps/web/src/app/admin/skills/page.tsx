@@ -14,6 +14,7 @@ export default function AdminSkillsPage() {
 
   const [skills, setSkills] = useState<any[]>([]);
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [category, setCategory] = useState<typeof CATEGORIES[number]>("Frontend");
   const [iconName, setIconName] = useState("Code2");
   const [iconUrl, setIconUrl] = useState("");
@@ -51,6 +52,7 @@ export default function AdminSkillsPage() {
 
     const payload = {
       name,
+      description,
       category,
       iconName,
       iconUrl,
@@ -82,6 +84,7 @@ export default function AdminSkillsPage() {
   const editSkill = (s: any) => {
     setEditingSkillId(s._id);
     setName(s.name || "");
+    setDescription(s.description || "");
     setCategory(s.category || "Frontend");
     setIconName(s.iconName || "Code2");
     setIconUrl(s.iconUrl || "");
@@ -119,6 +122,7 @@ export default function AdminSkillsPage() {
   const resetForm = () => {
     setEditingSkillId(null);
     setName("");
+    setDescription("");
     setCategory("Frontend");
     setIconName("Code2");
     setIconUrl("");
@@ -160,6 +164,17 @@ export default function AdminSkillsPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              className="w-full px-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Description</label>
+            <textarea
+              placeholder="Describe how you apply this technology..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={2}
               className="w-full px-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-lime-500 dark:focus:border-lime-450 focus:ring-1 focus:ring-lime-500/25 transition-colors"
             />
           </div>

@@ -115,6 +115,7 @@ export const createContactSchema = z.object({
 // ── Skills ───────────────────────────────────────────
 export const createSkillSchema = z.object({
   name: z.string().min(1, 'Name is required'),
+  description: z.string().optional(),
   category: z.enum(["Frontend", "Backend", "Database", "Languages", "Cloud & DevOps", "Tools & Design"]),
   iconName: z.string().optional().default("Code2"),
   iconUrl: z.string().optional().or(z.literal('')),
