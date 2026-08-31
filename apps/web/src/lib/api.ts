@@ -153,4 +153,8 @@ export const api = {
   createGalleryItem: (data: any) => request("/gallery", { method: "POST", body: JSON.stringify(data) }),
   updateGalleryItem: (id: string, data: any) => request(`/gallery/${id}`, { method: "PUT", body: JSON.stringify(data) }),
   deleteGalleryItem: (id: string) => request(`/gallery/${id}`, { method: "DELETE" }),
+
+  // GitHub Integration
+  getGithubSummary: (all = false) => request(`/github/summary${all ? "?all=true" : ""}`),
+  updateGithubConfig: (data: any) => request("/github/config", { method: "POST", body: JSON.stringify(data) }),
 };

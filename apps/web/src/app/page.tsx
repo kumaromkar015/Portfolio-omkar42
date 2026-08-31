@@ -9,6 +9,7 @@ import Services from "@/components/Services";
 import Achievements from "@/components/Achievements";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import GithubActivity from "@/components/GithubActivity";
 
 export async function generateMetadata(): Promise<Metadata> {
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
@@ -85,6 +86,9 @@ export default function Home() {
 
       {/* Case Studies / Projects */}
       <Projects />
+
+      {/* Live Engineering Activity */}
+      <GithubActivity />
 
       {/* Professional Services */}
       <Services />

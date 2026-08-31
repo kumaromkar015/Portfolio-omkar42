@@ -21,6 +21,7 @@ import mediaRoutes from "./routes/media.js";
 import skillsRoutes from "./routes/skills.js";
 import seoRoutes from "./routes/seo.js";
 import galleryRoutes from "./routes/gallery.js";
+import githubRoutes from "./routes/github.js";
 
 // Validate critical environment variables
 const requiredEnvVars = ["MONGODB_URI", "JWT_SECRET"] as const;
@@ -75,6 +76,7 @@ app.use("/api/media", mediaRoutes);
 app.use("/api/skills", skillsRoutes);
 app.use("/api/seo", seoRoutes);
 app.use("/api/gallery", galleryRoutes);
+app.use("/api/github", githubRoutes);
 
 // Health check
 app.get("/", (req, res) => {
