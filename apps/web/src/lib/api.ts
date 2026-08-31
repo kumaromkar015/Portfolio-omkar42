@@ -85,7 +85,7 @@ export const api = {
   deleteEducation: (id: string) => request(`/education/${id}`, { method: "DELETE" }),
 
   // Achievement
-  getAchievements: () => request("/achievement"),
+  getAchievements: (all = false) => request(`/achievement?all=${all}`),
   createAchievement: (data: any) => request("/achievement", { method: "POST", body: JSON.stringify(data) }),
   updateAchievement: (id: string, data: any) => request(`/achievement/${id}`, { method: "PUT", body: JSON.stringify(data) }),
   deleteAchievement: (id: string) => request(`/achievement/${id}`, { method: "DELETE" }),

@@ -11,6 +11,7 @@ export interface IExperience extends Document {
   displayOrder: number;
   isVisible: boolean;
   imageUrl?: string;
+  location?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,6 +32,7 @@ const experienceSchema = new Schema<IExperience>(
     displayOrder: { type: Number, default: 0 },
     isVisible: { type: Boolean, default: true },
     imageUrl: { type: String },
+    location: { type: String },
   },
   { timestamps: true }
 );

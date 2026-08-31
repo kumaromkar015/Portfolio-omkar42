@@ -78,6 +78,7 @@ export const createExperienceSchema = z.object({
   displayOrder: z.number().optional().default(0),
   isVisible: z.boolean().optional().default(true),
   imageUrl: z.string().optional().or(z.literal('')),
+  location: z.string().optional(),
 });
 
 export const updateExperienceSchema = createExperienceSchema.partial();
@@ -95,11 +96,16 @@ export const updateEducationSchema = createEducationSchema.partial();
 // ── Achievement ──────────────────────────────────────
 export const createAchievementSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  type: z.string().optional(),
-  date: z.string().optional(),
+  type: z.enum(["hackathon", "cert", "award", "milestone", "course", "recognition"]),
+  date: z.string().optional().or(z.literal('')),
   description: z.string().optional(),
   issuer: z.string().optional(),
-  link: z.string().url().optional().or(z.literal('')),
+  link: z.string().optional().or(z.literal('')),
+  imageUrl: z.string().optional().or(z.literal('')),
+  certificateUrl: z.string().optional().or(z.literal('')),
+  featured: z.boolean().optional().default(false),
+  displayOrder: z.number().optional().default(0),
+  isVisible: z.boolean().optional().default(true),
 });
 
 export const updateAchievementSchema = createAchievementSchema.partial();
