@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { LogOut, Home, User, FolderKanban, FileText, Image as ImageIcon, Sparkles, Globe, Images, GitBranch } from "lucide-react";
+import { LogOut, Home, User, FolderKanban, FileText, Image as ImageIcon, Sparkles, Globe, Images, GitBranch, History, MessageSquare } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [authorized, setAuthorized] = useState(false);
@@ -152,6 +152,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               }`}
             >
               <GitBranch size={14} /> GitHub
+            </Link>
+            <Link
+              href="/admin/changelog"
+              className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+                pathname === "/admin/changelog"
+                  ? "text-lime-650 dark:text-lime-400"
+                  : "text-slate-400 hover:text-slate-205"
+              }`}
+            >
+              <History size={14} /> Changelog
+            </Link>
+            <Link
+              href="/admin/testimonials"
+              className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+                pathname === "/admin/testimonials"
+                  ? "text-lime-650 dark:text-lime-400"
+                  : "text-slate-400 hover:text-slate-205"
+              }`}
+            >
+              <MessageSquare size={14} /> Testimonials
             </Link>
           </nav>
         </div>

@@ -32,6 +32,7 @@ export default function Navbar() {
     { label: "Gallery", href: "/gallery", isSection: false },
     { label: "Journey", href: "/journey", isSection: false },
     { label: "Achievements", href: "/achievements", isSection: false },
+    { label: "Changelog", href: "/changelog", isSection: false },
     { label: "Contact", href: "/#contact", isSection: true },
   ];
 
@@ -93,7 +94,8 @@ export default function Navbar() {
         <nav className="hidden lg:flex items-center gap-1.5 bg-slate-100/60 dark:bg-zinc-950/40 border border-slate-250 dark:border-zinc-800/80 px-2 py-1.5 rounded-full backdrop-blur-sm">
           {navLinks.map((link) => {
             const isBlogActive = link.href === "/blog" && pathname.startsWith("/blog");
-            const isActive = isBlogActive || (pathname === "/" && link.href === "/#home"); // Default simple active state helper
+            const isChangelogActive = link.href === "/changelog" && pathname.startsWith("/changelog");
+            const isActive = isBlogActive || isChangelogActive || (pathname === "/" && link.href === "/#home"); // Default active state helper
             return (
               <Link
                 key={link.label}

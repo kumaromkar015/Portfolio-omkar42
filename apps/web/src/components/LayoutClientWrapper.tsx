@@ -10,6 +10,8 @@ import CommandPalette from "./CommandPalette";
 import MusicPlayer from "./MusicPlayer";
 import InteractiveBackground from "./InteractiveBackground";
 import TerminalMode from "./TerminalMode";
+import AIAssistant from "./AIAssistant";
+import EasterEgg from "./EasterEgg";
 import { useState, useEffect } from "react";
 
 export default function LayoutClientWrapper({ children }: { children: React.ReactNode }) {
@@ -51,6 +53,8 @@ export default function LayoutClientWrapper({ children }: { children: React.Reac
       <MusicPlayer />
       <InteractiveBackground />
       <TerminalMode isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+      <AIAssistant />
+      <EasterEgg />
     </>
   );
 }

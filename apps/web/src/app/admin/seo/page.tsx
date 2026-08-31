@@ -28,6 +28,7 @@ export default function AdminSeoPage() {
   const [siteName, setSiteName] = useState("");
   const [twitterHandle, setTwitterHandle] = useState("");
   const [keywords, setKeywords] = useState("");
+  const [enableEasterEgg, setEnableEasterEgg] = useState(true);
 
   // Page SEO States (grouped in object)
   const [pageSeo, setPageSeo] = useState<Record<PageKey, any>>({
@@ -61,6 +62,7 @@ export default function AdminSeoPage() {
       setSiteName(global.siteName || "");
       setTwitterHandle(global.twitterHandle || "");
       setKeywords(global.keywords?.join(", ") || "");
+      setEnableEasterEgg(global.enableEasterEgg !== false);
 
       const pages = res.pages || {};
       const newPageSeo: any = {};
@@ -107,6 +109,7 @@ export default function AdminSeoPage() {
         siteName,
         keywords: keywords.split(",").map((s) => s.trim()).filter(Boolean),
         twitterHandle,
+        enableEasterEgg,
       },
       pages: pageSeo,
     };
@@ -266,6 +269,22 @@ export default function AdminSeoPage() {
                 onChange={setDefaultOgImage}
                 typeFilter="image"
               />
+
+              <div className="pt-4 border-t border-slate-100 dark:border-zinc-900/60 space-y-2">
+                <h4 className="text-xs font-extrabold uppercase tracking-widest text-lime-650 dark:text-lime-400">Developer Easter Egg</h4>
+                <label className="flex items-center gap-3.5 cursor-pointer p-4.5 rounded-2xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-850">
+                  <input
+                    type="checkbox"
+                    checked={enableEasterEgg}
+                    onChange={(e) => setEnableEasterEgg(e.target.checked)}
+                    className="w-5 h-5 accent-lime-500 cursor-pointer"
+                  />
+                  <div>
+                    <div className="text-xs font-bold text-slate-800 dark:text-slate-200">Enable Konami / Click easter egg</div>
+                    <div className="text-[10px] text-slate-500 font-semibold tracking-wide uppercase mt-0.5">Allows keyboard users (via Up-Up-Down-Down) or 5 clicks on logo to unlock developer joke dialog</div>
+                  </div>
+                </label>
+              </div>
             </div>
           )}
 

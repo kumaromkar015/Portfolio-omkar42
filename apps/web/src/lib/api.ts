@@ -157,4 +157,19 @@ export const api = {
   // GitHub Integration
   getGithubSummary: (all = false) => request(`/github/summary${all ? "?all=true" : ""}`),
   updateGithubConfig: (data: any) => request("/github/config", { method: "POST", body: JSON.stringify(data) }),
+
+  // Changelog Integration
+  getChangelogs: (all = false) => request(`/changelog${all ? "?all=true" : ""}`),
+  createChangelog: (data: any) => request("/changelog", { method: "POST", body: JSON.stringify(data) }),
+  updateChangelog: (id: string, data: any) => request(`/changelog/${id}`, { method: "PUT", body: JSON.stringify(data) }),
+  deleteChangelog: (id: string) => request(`/changelog/${id}`, { method: "DELETE" }),
+
+  // Testimonials Integration
+  getTestimonials: (all = false) => request(`/testimonials${all ? "?all=true" : ""}`),
+  createTestimonial: (data: any) => request("/testimonials", { method: "POST", body: JSON.stringify(data) }),
+  updateTestimonial: (id: string, data: any) => request(`/testimonials/${id}`, { method: "PUT", body: JSON.stringify(data) }),
+  deleteTestimonial: (id: string) => request(`/testimonials/${id}`, { method: "DELETE" }),
+
+  // AI Assistant Integration
+  chatWithAssistant: (message: string, history: any[]) => request("/assistant/chat", { method: "POST", body: JSON.stringify({ message, history }) }),
 };

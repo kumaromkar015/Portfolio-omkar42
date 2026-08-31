@@ -14,6 +14,18 @@ const ProjectSchema = new Schema(
 		featured: { type: Boolean, default: false },
 		category: { type: String },
 		tags: [String],
+		// Case Study Details
+		problem: { type: String },
+		solution: { type: String },
+		role: { type: String },
+		challenges: { type: String },
+		results: { type: String },
+		architecture: { type: String },
+		features: [String],
+		// SEO Metadata
+		metaTitle: { type: String },
+		metaDescription: { type: String },
+		metaKeywords: { type: String },
 	},
 	{ timestamps: true },
 );

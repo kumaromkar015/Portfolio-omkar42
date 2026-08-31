@@ -31,20 +31,29 @@ export const updateProfileSchema = z.object({
     .optional(),
 });
 
-// ── Projects ─────────────────────────────────────────
 export const createProjectSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   slug: z.string().min(1).regex(/^[a-z0-9-]+$/, 'Slug must be lowercase alphanumeric with hyphens').optional(),
   description: z.string().optional(),
   longDescription: z.string().optional(),
   techStack: z.array(z.string()).optional(),
-  liveUrl: z.string().url().optional().or(z.literal('')),
-  githubUrl: z.string().url().optional().or(z.literal('')),
+  liveUrl: z.string().optional().or(z.literal('')),
+  githubUrl: z.string().optional().or(z.literal('')),
   coverImage: z.string().optional(),
   gallery: z.array(z.string()).optional(),
   featured: z.boolean().optional(),
   category: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  problem: z.string().optional(),
+  solution: z.string().optional(),
+  role: z.string().optional(),
+  challenges: z.string().optional(),
+  results: z.string().optional(),
+  architecture: z.string().optional(),
+  features: z.array(z.string()).optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
+  metaKeywords: z.string().optional(),
 });
 
 export const updateProjectSchema = createProjectSchema.partial();
@@ -109,6 +118,38 @@ export const createAchievementSchema = z.object({
 });
 
 export const updateAchievementSchema = createAchievementSchema.partial();
+
+// ── Changelog ────────────────────────────────────────
+export const createChangelogSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  description: z.string().min(1, 'Description is required'),
+  date: z.string().min(1, 'Date is required'),
+  category: z.enum(["portfolio", "project", "career", "skill", "other"]).optional().default("portfolio"),
+  relatedProject: z.string().optional().nullable().or(z.literal('')),
+  imageUrl: z.string().optional().or(z.literal('')),
+  link: z.string().optional().or(z.literal('')),
+  isPublished: z.boolean().optional().default(true),
+  isFeatured: z.boolean().optional().default(false),
+  displayOrder: z.number().optional().default(0),
+});
+
+export const updateChangelogSchema = createChangelogSchema.partial();
+
+// ── Testimonials ─────────────────────────────────────
+export const createTestimonialSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  role: z.string().min(1, 'Role/Position is required'),
+  organization: z.string().min(1, 'Organization is required'),
+  quote: z.string().min(1, 'Quote is required'),
+  photoUrl: z.string().optional().or(z.literal('')),
+  profileUrl: z.string().optional().or(z.literal('')),
+  featured: z.boolean().optional().default(false),
+  displayOrder: z.number().optional().default(0),
+  isVisible: z.boolean().optional().default(true),
+  relationship: z.string().optional().or(z.literal('')),
+});
+
+export const updateTestimonialSchema = createTestimonialSchema.partial();
 
 // ── Contact ──────────────────────────────────────────
 export const createContactSchema = z.object({

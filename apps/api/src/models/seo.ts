@@ -22,6 +22,7 @@ const SeoSchema = new Schema(
       siteName: { type: String, default: "Omkar Kumar Portfolio" },
       keywords: [{ type: String }],
       twitterHandle: { type: String, default: "@kumaromkar" },
+      enableEasterEgg: { type: Boolean, default: true },
     },
     pages: {
       home: { type: PageSeoSchema, default: () => ({}) },

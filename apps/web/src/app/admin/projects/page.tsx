@@ -20,6 +20,18 @@ export default function AdminProjectsPage() {
   const [projectFeatured, setProjectFeatured] = useState(false);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
 
+  // Case Study & SEO states
+  const [projectProblem, setProjectProblem] = useState("");
+  const [projectSolution, setProjectSolution] = useState("");
+  const [projectRole, setProjectRole] = useState("");
+  const [projectChallenges, setProjectChallenges] = useState("");
+  const [projectResults, setProjectResults] = useState("");
+  const [projectArchitecture, setProjectArchitecture] = useState("");
+  const [projectFeatures, setProjectFeatures] = useState("");
+  const [projectMetaTitle, setProjectMetaTitle] = useState("");
+  const [projectMetaDesc, setProjectMetaDesc] = useState("");
+  const [projectMetaKeywords, setProjectMetaKeywords] = useState("");
+
   useEffect(() => {
     fetchProjects();
   }, []);
@@ -51,6 +63,16 @@ export default function AdminProjectsPage() {
       githubUrl: projectGithubUrl,
       coverImage: projectCoverImage,
       featured: projectFeatured,
+      problem: projectProblem || undefined,
+      solution: projectSolution || undefined,
+      role: projectRole || undefined,
+      challenges: projectChallenges || undefined,
+      results: projectResults || undefined,
+      architecture: projectArchitecture || undefined,
+      features: projectFeatures ? projectFeatures.split("\n").map((s) => s.trim()).filter(Boolean) : [],
+      metaTitle: projectMetaTitle || undefined,
+      metaDescription: projectMetaDesc || undefined,
+      metaKeywords: projectMetaKeywords || undefined,
     };
 
     try {
@@ -79,6 +101,17 @@ export default function AdminProjectsPage() {
     setProjectGithubUrl(p.githubUrl || "");
     setProjectCoverImage(p.coverImage || "");
     setProjectFeatured(p.featured || false);
+    // Case Study mapping
+    setProjectProblem(p.problem || "");
+    setProjectSolution(p.solution || "");
+    setProjectRole(p.role || "");
+    setProjectChallenges(p.challenges || "");
+    setProjectResults(p.results || "");
+    setProjectArchitecture(p.architecture || "");
+    setProjectFeatures(p.features?.join("\n") || "");
+    setProjectMetaTitle(p.metaTitle || "");
+    setProjectMetaDesc(p.metaDescription || "");
+    setProjectMetaKeywords(p.metaKeywords || "");
   };
 
   const deleteProject = async (id: string) => {
@@ -102,6 +135,16 @@ export default function AdminProjectsPage() {
     setProjectGithubUrl("");
     setProjectCoverImage("");
     setProjectFeatured(false);
+    setProjectProblem("");
+    setProjectSolution("");
+    setProjectRole("");
+    setProjectChallenges("");
+    setProjectResults("");
+    setProjectArchitecture("");
+    setProjectFeatures("");
+    setProjectMetaTitle("");
+    setProjectMetaDesc("");
+    setProjectMetaKeywords("");
   };
 
   return (
@@ -171,6 +214,130 @@ export default function AdminProjectsPage() {
               />
             </div>
           </div>
+          {/* Case Study Details Accordion */}
+          <details className="group border border-slate-200 dark:border-zinc-850 rounded-2xl p-4 bg-slate-50/50 dark:bg-zinc-950/20">
+            <summary className="text-xs font-bold uppercase tracking-wider text-lime-650 dark:text-lime-450 cursor-pointer list-none flex items-center justify-between select-none">
+              <span>Project Case Study & SEO (Optional)</span>
+              <span className="text-[10px] text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            
+            <div className="space-y-4 mt-4 border-t border-slate-200 dark:border-zinc-850 pt-4">
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">My Role</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Lead Frontend Architect"
+                  value={projectRole}
+                  onChange={(e) => setProjectRole(e.target.value)}
+                  className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Problem Statement</label>
+                <textarea
+                  rows={3}
+                  placeholder="Describe the challenge or problem this project solved..."
+                  value={projectProblem}
+                  onChange={(e) => setProjectProblem(e.target.value)}
+                  className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none resize-none font-sans"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Engineering Solution</label>
+                <textarea
+                  rows={3}
+                  placeholder="How was it solved? Detail the methodology..."
+                  value={projectSolution}
+                  onChange={(e) => setProjectSolution(e.target.value)}
+                  className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none resize-none font-sans"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Technical Challenges</label>
+                <textarea
+                  rows={3}
+                  placeholder="What were the bottleneck issues (e.g. state size, api latency)?"
+                  value={projectChallenges}
+                  onChange={(e) => setProjectChallenges(e.target.value)}
+                  className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none resize-none font-sans"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Business/Technical Results</label>
+                <textarea
+                  rows={2}
+                  placeholder="Performance metrics, speed scores, or user conversion results..."
+                  value={projectResults}
+                  onChange={(e) => setProjectResults(e.target.value)}
+                  className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none resize-none font-sans"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">System Architecture</label>
+                <textarea
+                  rows={3}
+                  placeholder="Explain the component flow, state architecture, database or rendering layers..."
+                  value={projectArchitecture}
+                  onChange={(e) => setProjectArchitecture(e.target.value)}
+                  className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none resize-none font-sans"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Key Features (One per line)</label>
+                <textarea
+                  rows={3}
+                  placeholder="Feature A&#13;&#10;Feature B&#13;&#10;Feature C"
+                  value={projectFeatures}
+                  onChange={(e) => setProjectFeatures(e.target.value)}
+                  className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none resize-none font-sans"
+                />
+              </div>
+
+              <div className="border-t border-slate-200 dark:border-zinc-850 pt-4 space-y-3">
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Search Engine Optimization (SEO)</h4>
+                
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Meta Title</label>
+                  <input
+                    type="text"
+                    placeholder="SEO friendly page title"
+                    value={projectMetaTitle}
+                    onChange={(e) => setProjectMetaTitle(e.target.value)}
+                    className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Meta Description</label>
+                  <textarea
+                    rows={2}
+                    placeholder="Short summary for Google search listings..."
+                    value={projectMetaDesc}
+                    onChange={(e) => setProjectMetaDesc(e.target.value)}
+                    className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none resize-none font-sans"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Keywords (comma separated)</label>
+                  <input
+                    type="text"
+                    placeholder="react components, custom mapping, charts"
+                    value={projectMetaKeywords}
+                    onChange={(e) => setProjectMetaKeywords(e.target.value)}
+                    className="w-full px-4 py-2 text-xs rounded-xl bg-white dark:bg-zinc-955 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white placeholder-slate-400 outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </details>
+
           <MediaPicker
             label="Cover Image"
             value={projectCoverImage}

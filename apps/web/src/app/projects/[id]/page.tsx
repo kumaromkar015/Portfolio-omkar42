@@ -19,18 +19,22 @@ async function getProjectData(id: string) {
         id: p._id,
         title: p.title,
         description: p.description,
-        extendedDescription: p.extendedDescription || "",
+        extendedDescription: p.longDescription || p.description || "",
         category: p.category,
         imageUrl: p.coverImage || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80",
         liveUrl: p.liveUrl || "",
         githubUrl: p.githubUrl || "",
-        techStack: p.tags || [],
+        techStack: p.techStack || p.tags || [],
         role: p.role || "",
+        problem: p.problem || "",
         challenges: p.challenges || "",
         solution: p.solution || "",
+        results: p.results || p.impact || "",
         architecture: p.architecture || "",
         features: p.features || [],
-        impact: p.impact || "",
+        metaTitle: p.metaTitle || "",
+        metaDescription: p.metaDescription || "",
+        metaKeywords: p.metaKeywords || "",
       };
     }
   } catch (error) {
@@ -41,8 +45,22 @@ async function getProjectData(id: string) {
   const staticMatch = projectsData.find((p) => p.id === id);
   if (staticMatch) {
     return {
-      ...staticMatch,
+      id: staticMatch.id,
+      title: staticMatch.title,
+      description: staticMatch.description,
       extendedDescription: staticMatch.extendedDescription || "",
+      category: staticMatch.category,
+      imageUrl: staticMatch.imageUrl,
+      liveUrl: staticMatch.liveUrl || "",
+      githubUrl: staticMatch.githubUrl || "",
+      techStack: staticMatch.techStack || [],
+      role: staticMatch.role || "",
+      problem: "",
+      challenges: staticMatch.challenges || "",
+      solution: staticMatch.solution || "",
+      results: staticMatch.impact || "",
+      architecture: staticMatch.architecture || "",
+      features: staticMatch.features || [],
     };
   }
 
@@ -71,12 +89,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     // Ignore, use defaults
   }
 
-  const title = `${project.title} | ${siteName}`;
-  const description = project.description || "Explore my engineering case study.";
+  const title = project.metaTitle ? `${project.metaTitle} | ${siteName}` : `${project.title} | ${siteName}`;
+  const description = project.metaDescription || project.description || "Explore my engineering case study.";
+  const keywords = (project as any).metaKeywords || "";
 
   return {
     title,
     description,
+    keywords: keywords || undefined,
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `${siteUrl}/projects/${project.id}`,
